@@ -9,9 +9,11 @@ export default defineConfig({
   server: {
     host: true,
     port,
+    allowedHosts: ['ethnic-s2m2.onrender.com', 'localhost', '127.0.0.1'],
   },
   preview: {
     host: true,
     port,
+    allowedHosts: ['ethnic-s2m2.onrender.com', 'localhost', '127.0.0.1'],
   },
 });
