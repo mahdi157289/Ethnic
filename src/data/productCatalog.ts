@@ -1,4 +1,4 @@
-import type { Category, Product } from '../types';
+import type { Category, FeaturedProduct, Product } from '../types';
 
 const imageModules = import.meta.glob<string>('../assets/product pictures/*.jpg', {
   eager: true,
@@ -109,7 +109,7 @@ export function buildSeedProducts(): Product[] {
   });
 }
 
-export function buildSeedFeaturedProduct(products: Product[]): Product | null {
+export function buildSeedFeaturedProduct(products: Product[]): FeaturedProduct | null {
   if (products.length === 0) return null;
   const featured = products[0];
   const original = featured.price;

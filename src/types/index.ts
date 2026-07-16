@@ -13,6 +13,10 @@ export interface Product {
   rating: number;
 }
 
+export interface FeaturedProduct extends Product {
+  type: 'featured';
+}
+
 export interface Category {
   id: number;
   name: string;

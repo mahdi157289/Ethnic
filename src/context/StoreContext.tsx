@@ -16,22 +16,13 @@ import type {
   CartItem,
   Category,
   Customer,
+  FeaturedProduct,
   NotificationType,
   Order,
   Product,
   Subscriber,
   Toast,
 } from '../types';
-import img1 from '../assets/product pictures/571213930_1231364232366527_2109138059830827614_n.jpg';
-import img2 from '../assets/product pictures/576374205_1237419018427715_5372252522487259330_n.jpg';
-import img3 from '../assets/product pictures/580733069_1245051070997843_6039157899864910099_n.jpg';
-import img4 from '../assets/product pictures/581772704_1245050987664518_6957091294094526148_n.jpg';
-import img5 from '../assets/product pictures/591048340_1258603809642569_3829171289695157483_n.jpg';
-import img6 from '../assets/product pictures/605465823_1280980504071566_1880378652509185128_n.jpg';
-import img7 from '../assets/product pictures/615571975_1291969626305987_1674098473504197529_n.jpg';
-import img8 from '../assets/product pictures/626686311_1309375694565380_4054011785654238202_n.jpg';
-import img9 from '../assets/product pictures/657310366_1355372823299000_3529125053196770722_n.jpg';
-import { heroImage } from '../assets/brand';
 import { formatPrice } from '../utils/formatPrice';
 
 interface StoreContextValue {
@@ -129,7 +120,7 @@ const StoreContext = createContext<StoreContextValue | null>(null);
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
-  const [featuredProduct, setFeaturedProduct] = useState<Product | null>(null);
+  const [featuredProduct, setFeaturedProduct] = useState<FeaturedProduct | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -167,7 +158,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     await db.saveBlogPosts(newBlogPosts);
   }, []);
 
-  const saveFeaturedProduct = useCallback(async (product: Product | null) => {
+  const saveFeaturedProduct = useCallback(async (product: FeaturedProduct | null) => {
     await db.saveFeaturedProduct(product);
   }, []);
 
@@ -354,9 +345,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       tags?: string[];
       rating?: number;
     }) => {
-      let newProduct: Product;
+      let newProduct: Product | FeaturedProduct;
       if (data.type === 'featured') {
-        newProduct = {
+        const featuredProductData: FeaturedProduct = {
           id: Date.now(),
           name: data.name,
           price: data.price,
@@ -370,8 +361,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           tags: data.tags ?? [],
           rating: data.rating ?? 5,
         };
-        setFeaturedProduct(newProduct);
-        saveFeaturedProduct(newProduct);
+        newProduct = featuredProductData;
+        setFeaturedProduct(featuredProductData);
+        saveFeaturedProduct(featuredProductData);
       } else {
         newProduct = {
           id: Date.now(),
@@ -422,7 +414,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       };
 
       if (data.type === 'featured') {
-        const updatedFeaturedProduct: Product = {
+        const updatedFeaturedProduct: FeaturedProduct = {
           ...updatedProductBase,
           type: 'featured',
           salePrice: data.salePrice ?? Math.floor(data.price * 0.8),

@@ -6,16 +6,6 @@ import {
   buildSeedFeaturedProduct, 
   buildSeedProducts 
 } from '../data/productCatalog';
-import img1 from '../assets/product pictures/571213930_1231364232366527_2109138059830827614_n.jpg';
-import img2 from '../assets/product pictures/576374205_1237419018427715_5372252522487259330_n.jpg';
-import img3 from '../assets/product pictures/580733069_1245051070997843_6039157899864910099_n.jpg';
-import img4 from '../assets/product pictures/581772704_1245050987664518_6957091294094526148_n.jpg';
-import img5 from '../assets/product pictures/591048340_1258603809642569_3829171289695157483_n.jpg';
-import img6 from '../assets/product pictures/605465823_1280980504071566_1880378652509185128_n.jpg';
-import img7 from '../assets/product pictures/615571975_1291969626305987_1674098473504197529_n.jpg';
-import img8 from '../assets/product pictures/626686311_1309375694565380_4054011785654238202_n.jpg';
-import img9 from '../assets/product pictures/657310366_1355372823299000_3529125053196770722_n.jpg';
-import { heroImage } from '../assets/brand';
 
 const STORAGE_VERSION = '1';
 const STORAGE_VERSION_KEY = 'db_storage_version';
@@ -71,22 +61,36 @@ export interface FeaturedProduct extends Product {
 
 // Helper to get seed gallery images
 function getSeedGalleryImages(): string[] {
-  return [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+  const imageModules = import.meta.glob<string>('../assets/product pictures/*.jpg', {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  });
+  return Object.values(imageModules).slice(0, 9);
 }
 
 // Helper to get seed welcome images
 function getSeedWelcomeImages(): string[] {
-  return [heroImage];
+  const brandModules = import.meta.glob<string>('../assets/brand.ts', {
+    eager: true,
+  });
+  return Object.values(brandModules).slice(0, 1) as string[];
 }
 
 // Helper to get seed blog posts
 function getSeedBlogPosts(): BlogPost[] {
+  const imageModules = import.meta.glob<string>('../assets/product pictures/*.jpg', {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  });
+  const images = Object.values(imageModules);
   return [
     {
       id: 1,
       title: "L'Artisanat au Cœur de nos Bijoux",
       content: "Découvrez comment chaque pièce est créée avec passion et savoir-faire ancestral dans notre atelier Ethnic. Nous mettons un point d'honneur à préserver les techniques traditionnelles tout en ajoutant une touche moderne.",
-      image: img1,
+      image: images[0] ?? '',
       author: "Équipe Ethnic",
       createdAt: "15/06/2026"
     },
@@ -94,7 +98,7 @@ function getSeedBlogPosts(): BlogPost[] {
       id: 2,
       title: "Comment Entretenir vos Bijoux Éthniques",
       content: "Conseils pratiques pour prendre soin de vos bijoux et conserver leur éclat au fil du temps. Nettoyage, rangement, précautions à prendre — on vous dit tout !",
-      image: img2,
+      image: images[1] ?? '',
       author: "Marie Dubois",
       createdAt: "20/06/2026"
     },
@@ -102,7 +106,7 @@ function getSeedBlogPosts(): BlogPost[] {
       id: 3,
       title: "Notre Nouvelle Collection Été 2026",
       content: "Présentation de notre toute nouvelle collection inspirée par les voyages et les cultures du monde. Couleurs vibrantes, designs uniques — ne la ratez pas !",
-      image: img3,
+      image: images[2] ?? '',
       author: "Lucas Martin",
       createdAt: "22/06/2026"
     }
