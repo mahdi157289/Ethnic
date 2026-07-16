@@ -94,52 +94,52 @@ export function Nav() {
           <Link 
             to="/#collection" 
             className={`${navLinkBase} text-white relative${activeSection === 'collection' && !isStorePage ? ' active' : ''}`}
-            ref={el => desktopLinksRef.current[0] = el}
+            ref={el => { desktopLinksRef.current[0] = el; }}
             onMouseEnter={handleLinkEnter(0, false)}
             onMouseLeave={handleLinkLeave(0, false)}
           >
             Collection
             <span 
-              ref={el => desktopUnderlineRefs.current[0] = el}
+              ref={el => { desktopUnderlineRefs.current[0] = el; }}
               className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
             />
           </Link>
           <Link 
             to="/store" 
             className={`${navLinkBase} text-white relative${isStorePage ? ' active' : ''}`}
-            ref={el => desktopLinksRef.current[1] = el}
+            ref={el => { desktopLinksRef.current[1] = el; }}
             onMouseEnter={handleLinkEnter(1, false)}
             onMouseLeave={handleLinkLeave(1, false)}
           >
             Boutique
             <span 
-              ref={el => desktopUnderlineRefs.current[1] = el}
+              ref={el => { desktopUnderlineRefs.current[1] = el; }}
               className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
             />
           </Link>
           <Link 
             to="/#about" 
             className={`${navLinkBase} text-white relative${activeSection === 'about' && !isStorePage ? ' active' : ''}`}
-            ref={el => desktopLinksRef.current[2] = el}
+            ref={el => { desktopLinksRef.current[2] = el; }}
             onMouseEnter={handleLinkEnter(2, false)}
             onMouseLeave={handleLinkLeave(2, false)}
           >
             À Propos
             <span 
-              ref={el => desktopUnderlineRefs.current[2] = el}
+              ref={el => { desktopUnderlineRefs.current[2] = el; }}
               className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
             />
           </Link>
           <Link 
             to="/#contact" 
             className={`${navLinkBase} text-white relative${activeSection === 'contact' && !isStorePage ? ' active' : ''}`}
-            ref={el => desktopLinksRef.current[3] = el}
+            ref={el => { desktopLinksRef.current[3] = el; }}
             onMouseEnter={handleLinkEnter(3, false)}
             onMouseLeave={handleLinkLeave(3, false)}
           >
             Contact
             <span 
-              ref={el => desktopUnderlineRefs.current[3] = el}
+              ref={el => { desktopUnderlineRefs.current[3] = el; }}
               className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
             />
           </Link>
@@ -194,13 +194,13 @@ export function Nav() {
               to="/#collection" 
               className={`${mobileNavLinkBase} relative inline-block`} 
               onClick={closeMobileMenu}
-              ref={el => mobileLinksRef.current[0] = el}
+              ref={el => { mobileLinksRef.current[0] = el; }}
               onMouseEnter={handleLinkEnter(0, true)}
               onMouseLeave={handleLinkLeave(0, true)}
             >
               Collection
               <span 
-                ref={el => mobileUnderlineRefs.current[0] = el}
+                ref={el => { mobileUnderlineRefs.current[0] = el; }}
                 className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
               />
             </Link>
@@ -208,13 +208,13 @@ export function Nav() {
               to="/store" 
               className={`${mobileNavLinkBase} relative inline-block`} 
               onClick={closeMobileMenu}
-              ref={el => mobileLinksRef.current[1] = el}
+              ref={el => { mobileLinksRef.current[1] = el; }}
               onMouseEnter={handleLinkEnter(1, true)}
               onMouseLeave={handleLinkLeave(1, true)}
             >
               Boutique
               <span 
-                ref={el => mobileUnderlineRefs.current[1] = el}
+                ref={el => { mobileUnderlineRefs.current[1] = el; }}
                 className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
               />
             </Link>
@@ -222,13 +222,13 @@ export function Nav() {
               to="/#about" 
               className={`${mobileNavLinkBase} relative inline-block`} 
               onClick={closeMobileMenu}
-              ref={el => mobileLinksRef.current[2] = el}
+              ref={el => { mobileLinksRef.current[2] = el; }}
               onMouseEnter={handleLinkEnter(2, true)}
               onMouseLeave={handleLinkLeave(2, true)}
             >
               À Propos
               <span 
-                ref={el => mobileUnderlineRefs.current[2] = el}
+                ref={el => { mobileUnderlineRefs.current[2] = el; }}
                 className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
               />
             </Link>
@@ -236,13 +236,13 @@ export function Nav() {
               to="/#contact" 
               className={`${mobileNavLinkBase} relative inline-block`} 
               onClick={closeMobileMenu}
-              ref={el => mobileLinksRef.current[3] = el}
+              ref={el => { mobileLinksRef.current[3] = el; }}
               onMouseEnter={handleLinkEnter(3, true)}
               onMouseLeave={handleLinkLeave(3, true)}
             >
               Contact
               <span 
-                ref={el => mobileUnderlineRefs.current[3] = el}
+                ref={el => { mobileUnderlineRefs.current[3] = el; }}
                 className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
               />
             </Link>
