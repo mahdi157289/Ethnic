@@ -3,5 +3,5 @@ services:
     name: ethnic
     runtime: node
     buildCommand: npm install && npm run build
-    startCommand: npm run preview
+    startCommand: node server.cjs
     pullRequestPreviewsEnabled: false
