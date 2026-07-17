@@ -71,10 +71,12 @@ function getSeedGalleryImages(): string[] {
 
 // Helper to get seed welcome images
 function getSeedWelcomeImages(): string[] {
-  const brandModules = import.meta.glob<string>('../assets/brand.ts', {
+  const imageModules = import.meta.glob<string>('../assets/product pictures/*.jpg', {
     eager: true,
+    query: '?url',
+    import: 'default',
   });
-  return Object.values(brandModules).slice(0, 1) as string[];
+  return Object.values(imageModules).slice(0, 1);
 }
 
 // Helper to get seed blog posts

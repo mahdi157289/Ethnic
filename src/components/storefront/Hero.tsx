@@ -72,10 +72,10 @@ export function Hero() {
           <div className="absolute -top-10 -left-10 w-72 h-72 bg-[#E8E0D5] rounded-full blur-3xl opacity-60" />
           <div className="relative z-10 float-animation">
             <div className="forma-card bg-white p-8 rounded-3xl shadow-2xl shadow-[#D4C8B8]/30">
-              {currentWelcomeImage ? (
+              {currentWelcomeImage && typeof currentWelcomeImage === 'string' ? (
                 <img
                   src={currentWelcomeImage}
-                  key={currentWelcomeImage}
+                  key={`welcome-${activeWelcomeImageIndex}`}
                   alt="Bijoux artisanaux Ethnic"
                   className="w-full h-80 object-cover rounded-2xl transition-opacity duration-1000"
                 />
