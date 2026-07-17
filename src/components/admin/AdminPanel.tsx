@@ -34,6 +34,31 @@ export function AdminPanel() {
     return () => clearTimeout(t);
   }, [adminPage]);
 
+  const downloadAdminData = () => {
+    const data: Record<string, unknown> = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key || !key.startsWith('db_')) continue;
+      const raw = localStorage.getItem(key);
+      if (!raw) continue;
+      try {
+        data[key] = JSON.parse(raw);
+      } catch {
+        data[key] = raw;
+      }
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const stamp = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `ethnic-admin-data-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   // Important: only mount admin when open. This guarantees the storefront
   // is always accessible even if a translate utility is missing from CSS.
   if (!adminOpen) return null;
@@ -116,16 +141,26 @@ export function AdminPanel() {
             </button>
         </nav>
 
-            <div className="p-4 border-t border-white/10">
+            <div className="p-4 border-t border-white/10 space-y-2">
               <button
                 type="button"
                 onClick={toggleAdmin}
-                className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-xl transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-xl transition-all duration-300"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
                 <span className="exit-btn-text text-sm">Exit Admin</span>
+              </button>
+              <button
+                type="button"
+                onClick={downloadAdminData}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--gold)]/20 hover:bg-[var(--gold)]/30 text-[var(--gold-light)] hover:text-white rounded-xl transition-all duration-300"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span className="exit-btn-text text-sm">Download Data (JSON)</span>
               </button>
             </div>
           </div>
