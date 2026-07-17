@@ -6,6 +6,7 @@ import {
   buildSeedFeaturedProduct, 
   buildSeedProducts 
 } from '../data/productCatalog';
+import adminData from '../assets/admin-data.json';
 
 const STORAGE_VERSION = '1';
 const STORAGE_VERSION_KEY = 'db_storage_version';
@@ -151,6 +152,13 @@ class MockDatabaseService implements DatabaseService {
     const localStorageData = this.loadFromLocalStorage<{ products: Product[] }>('db_products-seed.json');
     if (localStorageData && localStorageData.products.length > 0) {
       return localStorageData.products;
+    }
+    // Use committed admin data (admin-data.json) as seed if available
+    const adminProducts = (adminData as Record<string, unknown>)['db_products-seed.json'] as
+      | { products: Product[] }
+      | undefined;
+    if (adminProducts && Array.isArray(adminProducts.products) && adminProducts.products.length > 0) {
+      return adminProducts.products;
     }
     // Fallback to seed data
     return buildSeedProducts();
