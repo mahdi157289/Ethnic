@@ -8,7 +8,7 @@ import { Footer } from '../components/layout/Footer';
 export function BlogPostPage() {
   const { id } = useParams<{ id: string }>();
   const { blogPosts } = useStore();
-  
+
   const blogPost = blogPosts.find(post => post.id === Number(id));
 
   if (!blogPost) {
@@ -35,9 +35,9 @@ export function BlogPostPage() {
     <>
       <Helmet>
         <title>{blogPost.title} | Ethnic</title>
-        <meta name="description" content={blogPost.content.substring(0, 160)} />
+        <meta name="description" content={blogPost.content.replace(/<[^>]+>/g, '').substring(0, 160)} />
         <meta property="og:title" content={blogPost.title} />
-        <meta property="og:description" content={blogPost.content.substring(0, 160)} />
+        <meta property="og:description" content={blogPost.content.replace(/<[^>]+>/g, '').substring(0, 160)} />
         <meta property="og:image" content={blogPost.image} />
         <meta property="og:url" content={canonicalUrl} />
         <meta name="twitter:image" content={blogPost.image} />
@@ -65,43 +65,58 @@ export function BlogPostPage() {
         `}</script>
       </Helmet>
       <Nav />
-      <article className="pt-40 pb-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      <article className="pt-32 pb-24 px-6 bg-[var(--cream)]" style={{ fontFamily: "'Inter', sans-serif" }}>
+        {/* Back link */}
+        <div className="max-w-3xl mx-auto mb-8">
           <Link
             to="/#blog"
-            className="inline-flex items-center gap-2 text-[#0F0F0F] hover:opacity-60 transition-opacity mb-8"
+            className="inline-flex items-center gap-2 text-[var(--charcoal)] hover:opacity-60 transition-opacity cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Blog
           </Link>
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-stretch max-h-[50vh]">
-            <div className="forma-card bg-white rounded-3xl overflow-hidden h-[400px]">
-              <img
-                src={blogPost.image}
-                alt={blogPost.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="forma-card bg-white rounded-3xl p-8 space-y-4 overflow-y-auto h-[400px]">
-              <div className="flex items-center gap-4 text-sm text-[#0F0F0F]/60">
-                <span>By {blogPost.author}</span>
-                <span>•</span>
-                <span>{blogPost.createdAt}</span>
-              </div>
-              
-              <h1 className="font-display text-4xl md:text-5xl text-[#0F0F0F]">
-                {blogPost.title}
-              </h1>
-              
-              <div
-                className="prose-blog text-[#0F0F0F]/80 leading-relaxed text-lg"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
-              />
-            </div>
+        </div>
+
+        {/* Article header */}
+        <header className="max-w-3xl mx-auto text-center mb-10">
+          <div className="flex items-center justify-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
+            <span>Journal</span>
+            <span className="w-1 h-1 rounded-full bg-[var(--gold)]" />
+            <span>{blogPost.createdAt}</span>
+          </div>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[var(--charcoal)] leading-tight">
+            {blogPost.title}
+          </h1>
+          <p className="mt-4 text-[var(--charcoal)]/60">By {blogPost.author}</p>
+        </header>
+
+        {/* Hero image */}
+        <div className="max-w-5xl mx-auto mb-12">
+          <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
+            <img
+              src={blogPost.image}
+              alt={blogPost.title}
+              className="w-full h-[300px] md:h-[460px] object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Article body — expanded, no height limit */}
+        <div className="max-w-3xl mx-auto">
+          <div
+            className="prose-blog text-[var(--charcoal)]/85 leading-loose text-lg md:text-xl"
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
+          />
+
+          <div className="mt-14 pt-8 border-t border-[var(--gold)]/40 text-center">
+            <Link
+              to="/blog"
+              className="forma-btn-outline cursor-pointer"
+            >
+              Voir tous les articles
+            </Link>
           </div>
         </div>
       </article>
