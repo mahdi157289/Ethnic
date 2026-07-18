@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { AboutSection } from '../components/storefront/AboutSection';
 import { BlogSection } from '../components/storefront/BlogSection';
-import { CartSidebar } from '../components/cart/CartSidebar';
 import { CategoriesSection } from '../components/storefront/CategoriesSection';
 import { CheckoutModal } from '../components/cart/CheckoutModal';
 import { CollectionCarouselSection } from '../components/storefront/CollectionCarouselSection';
@@ -46,7 +45,6 @@ export function HomePage() {
       <Footer />
       <AdminFab />
       <AdminPanel />
-      <CartSidebar />
       <CheckoutModal />
       <OrderSuccessModal />
       <NotificationToasts />

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { StoreProvider } from './context/StoreContext';
 import { VideoLoader } from './components/ui/VideoLoader';
 import { QuickViewModal } from './components/product/QuickViewModal';
+import { CartSidebar } from './components/cart/CartSidebar';
 import { HomePage } from './pages/HomePage';
 import { StorePage } from './pages/StorePage';
 import { BlogPostPage } from './pages/BlogPostPage';
@@ -24,8 +25,9 @@ export default function App() {
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/:id" element={<BlogPostPage />} />
               </Routes>
-              {/* Global quick-view modal — available on every page */}
+              {/* Global overlays — available on every page */}
               <QuickViewModal />
+              <CartSidebar />
             </div>
           </BrowserRouter>
         </StoreProvider>

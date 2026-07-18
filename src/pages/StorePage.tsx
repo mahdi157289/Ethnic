@@ -3,7 +3,6 @@ import { Nav } from '../components/layout/Nav';
 import { Footer } from '../components/layout/Footer';
 import { CollectionSection } from '../components/storefront/CollectionSection';
 import { AdminFab, AdminPanel } from '../components/admin/AdminPanel';
-import { CartSidebar } from '../components/cart/CartSidebar';
 import { CheckoutModal } from '../components/cart/CheckoutModal';
 import { OrderSuccessModal } from '../components/cart/OrderSuccessModal';
 import { NotificationToasts } from '../components/ui/NotificationToasts';
@@ -35,7 +34,6 @@ export function StorePage() {
 
       <AdminFab />
       <AdminPanel />
-      <CartSidebar />
       <CheckoutModal />
       <OrderSuccessModal />
       <NotificationToasts />
