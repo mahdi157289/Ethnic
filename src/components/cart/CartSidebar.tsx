@@ -2,33 +2,28 @@ import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { formatPrice } from '../../utils/formatPrice';
 
-const IDLE_TIMEOUT = 6000; // auto-close after 6s of no interaction
+const OPEN_DURATION = 3000; // stay open for 3s before auto-closing
 const EXIT_MS = 300; // smooth close duration
 
 export function CartSidebar() {
   const { cartOpen, toggleCart, cart, removeFromCart, cartTotal, toggleCheckout } = useStore();
   const [closing, setClosing] = useState(false);
-  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Start/reset the idle timer whenever the sidebar is open
-  const resetIdle = () => {
-    if (idleTimer.current) clearTimeout(idleTimer.current);
-    idleTimer.current = setTimeout(() => {
+  useEffect(() => {
+    if (!cartOpen) return;
+    setClosing(false);
+    // Open for OPEN_DURATION, then animate closed
+    openTimer.current = setTimeout(() => {
       setClosing(true);
       closeTimer.current = setTimeout(() => {
         setClosing(false);
         toggleCart();
       }, EXIT_MS);
-    }, IDLE_TIMEOUT);
-  };
-
-  useEffect(() => {
-    if (!cartOpen) return;
-    setClosing(false);
-    resetIdle();
+    }, OPEN_DURATION);
     return () => {
-      if (idleTimer.current) clearTimeout(idleTimer.current);
+      if (openTimer.current) clearTimeout(openTimer.current);
       if (closeTimer.current) clearTimeout(closeTimer.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,16 +31,10 @@ export function CartSidebar() {
 
   if (!cartOpen) return null;
 
-  const handleInteraction = () => resetIdle();
-
   return (
     <>
       <div
         id="cart-sidebar"
-        onMouseMove={handleInteraction}
-        onClick={handleInteraction}
-        onScroll={handleInteraction}
-        onKeyDown={handleInteraction}
         style={{
           transition: `transform ${EXIT_MS}ms ease, opacity ${EXIT_MS}ms ease`,
           transform: closing ? 'translateX(100%)' : 'translateX(0)',
