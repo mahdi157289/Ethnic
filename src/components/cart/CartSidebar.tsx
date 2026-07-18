@@ -1,14 +1,58 @@
+import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { formatPrice } from '../../utils/formatPrice';
 
+const IDLE_TIMEOUT = 6000; // auto-close after 6s of no interaction
+const EXIT_MS = 300; // smooth close duration
+
 export function CartSidebar() {
   const { cartOpen, toggleCart, cart, removeFromCart, cartTotal, toggleCheckout } = useStore();
+  const [closing, setClosing] = useState(false);
+  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Start/reset the idle timer whenever the sidebar is open
+  const resetIdle = () => {
+    if (idleTimer.current) clearTimeout(idleTimer.current);
+    idleTimer.current = setTimeout(() => {
+      setClosing(true);
+      closeTimer.current = setTimeout(() => {
+        setClosing(false);
+        toggleCart();
+      }, EXIT_MS);
+    }, IDLE_TIMEOUT);
+  };
+
+  useEffect(() => {
+    if (!cartOpen) return;
+    setClosing(false);
+    resetIdle();
+    return () => {
+      if (idleTimer.current) clearTimeout(idleTimer.current);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartOpen]);
 
   if (!cartOpen) return null;
 
+  const handleInteraction = () => resetIdle();
+
   return (
     <>
-      <div id="cart-sidebar" className="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl z-50">
+      <div
+        id="cart-sidebar"
+        onMouseMove={handleInteraction}
+        onClick={handleInteraction}
+        onScroll={handleInteraction}
+        onKeyDown={handleInteraction}
+        style={{
+          transition: `transform ${EXIT_MS}ms ease, opacity ${EXIT_MS}ms ease`,
+          transform: closing ? 'translateX(100%)' : 'translateX(0)',
+          opacity: closing ? 0 : 1,
+        }}
+        className="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl z-50"
+      >
         <div className="p-8 h-full flex flex-col">
           <div className="flex justify-between items-center mb-8">
             <h3 className="font-display text-2xl text-[#0F0F0F]">Your Cart</h3>
