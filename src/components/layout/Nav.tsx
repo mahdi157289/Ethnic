@@ -6,7 +6,7 @@ import { BrandLogo } from '../ui/BrandLogo';
 import { ethnicNavbarLogo } from '../../assets/brand';
 import gsap from 'gsap';
 
-const NAV_SECTIONS = ['collection', 'about', 'contact'];
+const NAV_SECTIONS = ['collection', 'blog', 'categories-section'];
 
 export function Nav() {
   const activeSection = useScrollSpy(NAV_SECTIONS);
@@ -118,26 +118,26 @@ export function Nav() {
             />
           </Link>
           <Link 
-            to="/#about" 
-            className={`${navLinkBase} text-white relative${activeSection === 'about' && !isStorePage ? ' active' : ''}`}
+            to="/#blog" 
+            className={`${navLinkBase} text-white relative${activeSection === 'blog' && !isStorePage ? ' active' : ''}`}
             ref={(el) => { desktopLinksRef.current[2] = el; }}
             onMouseEnter={handleLinkEnter(2, false)}
             onMouseLeave={handleLinkLeave(2, false)}
           >
-            À Propos
+            Blog
             <span 
               ref={(el) => { desktopUnderlineRefs.current[2] = el; }}
               className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
             />
           </Link>
           <Link 
-            to="/#contact" 
-            className={`${navLinkBase} text-white relative${activeSection === 'contact' && !isStorePage ? ' active' : ''}`}
+            to="/#categories-section" 
+            className={`${navLinkBase} text-white relative${activeSection === 'categories-section' && !isStorePage ? ' active' : ''}`}
             ref={(el) => { desktopLinksRef.current[3] = el; }}
             onMouseEnter={handleLinkEnter(3, false)}
             onMouseLeave={handleLinkLeave(3, false)}
           >
-            Contact
+            Category
             <span 
               ref={(el) => { desktopUnderlineRefs.current[3] = el; }}
               className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
@@ -219,28 +219,28 @@ export function Nav() {
               />
             </Link>
             <Link 
-              to="/#about" 
+              to="/#blog" 
               className={`${mobileNavLinkBase} relative inline-block`} 
               onClick={closeMobileMenu}
               ref={(el) => { mobileLinksRef.current[2] = el; }}
               onMouseEnter={handleLinkEnter(2, true)}
               onMouseLeave={handleLinkLeave(2, true)}
             >
-              À Propos
+              Blog
               <span 
                 ref={(el) => { mobileUnderlineRefs.current[2] = el; }}
                 className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
               />
             </Link>
             <Link 
-              to="/#contact" 
+              to="/#categories-section" 
               className={`${mobileNavLinkBase} relative inline-block`} 
               onClick={closeMobileMenu}
               ref={(el) => { mobileLinksRef.current[3] = el; }}
               onMouseEnter={handleLinkEnter(3, true)}
               onMouseLeave={handleLinkLeave(3, true)}
             >
-              Contact
+              Category
               <span 
                 ref={(el) => { mobileUnderlineRefs.current[3] = el; }}
                 className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--gold)] origin-left scale-x-0"
