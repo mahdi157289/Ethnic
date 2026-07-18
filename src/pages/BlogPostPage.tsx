@@ -4,10 +4,11 @@ import DOMPurify from 'dompurify';
 import { useStore } from '../context/StoreContext';
 import { Nav } from '../components/layout/Nav';
 import { Footer } from '../components/layout/Footer';
+import { ProductCard } from '../components/storefront/ProductCard';
 
 export function BlogPostPage() {
   const { id } = useParams<{ id: string }>();
-  const { blogPosts } = useStore();
+  const { blogPosts, products } = useStore();
 
   const blogPost = blogPosts.find(post => post.id === Number(id));
 
@@ -82,7 +83,7 @@ export function BlogPostPage() {
         {/* Two-column: image left, content right */}
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Image — left (sticky on desktop) */}
-          <div className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-28 space-y-8">
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
               <img
                 src={blogPost.image}
@@ -90,6 +91,20 @@ export function BlogPostPage() {
                 className="w-full h-[300px] md:h-[440px] lg:h-[560px] object-cover"
               />
             </div>
+
+            {/* Product recommendations to inspire the reader */}
+            {products.length > 0 && (
+              <div>
+                <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
+                  Vous aimerez aussi
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {products.slice(0, 4).map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Content — right */}
