@@ -4,6 +4,10 @@ import { StoreProvider } from './context/StoreContext';
 import { VideoLoader } from './components/ui/VideoLoader';
 import { QuickViewModal } from './components/product/QuickViewModal';
 import { CartSidebar } from './components/cart/CartSidebar';
+import { CheckoutModal } from './components/cart/CheckoutModal';
+import { OrderSuccessModal } from './components/cart/OrderSuccessModal';
+import { NotificationToasts } from './components/ui/NotificationToasts';
+import { AdminFab, AdminPanel } from './components/admin/AdminPanel';
 import { HomePage } from './pages/HomePage';
 import { StorePage } from './pages/StorePage';
 import { BlogPostPage } from './pages/BlogPostPage';
@@ -28,6 +32,11 @@ export default function App() {
               {/* Global overlays — available on every page */}
               <QuickViewModal />
               <CartSidebar />
+              <CheckoutModal />
+              <OrderSuccessModal />
+              <NotificationToasts />
+              <AdminFab />
+              <AdminPanel />
             </div>
           </BrowserRouter>
         </StoreProvider>

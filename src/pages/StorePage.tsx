@@ -2,10 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { Nav } from '../components/layout/Nav';
 import { Footer } from '../components/layout/Footer';
 import { CollectionSection } from '../components/storefront/CollectionSection';
-import { AdminFab, AdminPanel } from '../components/admin/AdminPanel';
-import { CheckoutModal } from '../components/cart/CheckoutModal';
-import { OrderSuccessModal } from '../components/cart/OrderSuccessModal';
-import { NotificationToasts } from '../components/ui/NotificationToasts';
 
 export function StorePage() {
   return (
@@ -31,12 +27,6 @@ export function StorePage() {
       </div>
       <CollectionSection hideTitle />
       <Footer />
-
-      <AdminFab />
-      <AdminPanel />
-      <CheckoutModal />
-      <OrderSuccessModal />
-      <NotificationToasts />
     </>
   );
 }

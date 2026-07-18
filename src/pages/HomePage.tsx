@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { AboutSection } from '../components/storefront/AboutSection';
 import { BlogSection } from '../components/storefront/BlogSection';
 import { CategoriesSection } from '../components/storefront/CategoriesSection';
-import { CheckoutModal } from '../components/cart/CheckoutModal';
 import { CollectionCarouselSection } from '../components/storefront/CollectionCarouselSection';
 import { FeaturedSection } from '../components/storefront/FeaturedSection';
 import { Footer } from '../components/layout/Footer';
@@ -10,9 +9,6 @@ import { GallerySection } from '../components/storefront/GallerySection';
 import { Hero } from '../components/storefront/Hero';
 import { Nav } from '../components/layout/Nav';
 import { NewsletterSection } from '../components/storefront/NewsletterSection';
-import { OrderSuccessModal } from '../components/cart/OrderSuccessModal';
-import { AdminFab, AdminPanel } from '../components/admin/AdminPanel';
-import { NotificationToasts } from '../components/ui/NotificationToasts';
 
 export function HomePage() {
   return (
@@ -43,11 +39,6 @@ export function HomePage() {
       <AboutSection />
       <NewsletterSection />
       <Footer />
-      <AdminFab />
-      <AdminPanel />
-      <CheckoutModal />
-      <OrderSuccessModal />
-      <NotificationToasts />
     </>
   );
 }
