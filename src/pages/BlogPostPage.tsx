@@ -67,7 +67,7 @@ export function BlogPostPage() {
       <Nav />
       <article className="pt-32 pb-24 px-6 bg-[var(--cream)]" style={{ fontFamily: "'Inter', sans-serif" }}>
         {/* Back link */}
-        <div className="max-w-3xl mx-auto mb-8">
+        <div className="max-w-6xl mx-auto mb-8">
           <Link
             to="/#blog"
             className="inline-flex items-center gap-2 text-[var(--charcoal)] hover:opacity-60 transition-opacity cursor-pointer"
@@ -79,44 +79,44 @@ export function BlogPostPage() {
           </Link>
         </div>
 
-        {/* Article header */}
-        <header className="max-w-3xl mx-auto text-center mb-10">
-          <div className="flex items-center justify-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
-            <span>Journal</span>
-            <span className="w-1 h-1 rounded-full bg-[var(--gold)]" />
-            <span>{blogPost.createdAt}</span>
+        {/* Two-column: image left, content right */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          {/* Image — left (sticky on desktop) */}
+          <div className="lg:sticky lg:top-28">
+            <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
+              <img
+                src={blogPost.image}
+                alt={blogPost.title}
+                className="w-full h-[300px] md:h-[440px] lg:h-[560px] object-cover"
+              />
+            </div>
           </div>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[var(--charcoal)] leading-tight">
-            {blogPost.title}
-          </h1>
-          <p className="mt-4 text-[var(--charcoal)]/60">By {blogPost.author}</p>
-        </header>
 
-        {/* Hero image */}
-        <div className="max-w-5xl mx-auto mb-12">
-          <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
-            <img
-              src={blogPost.image}
-              alt={blogPost.title}
-              className="w-full h-[300px] md:h-[460px] object-cover"
+          {/* Content — right */}
+          <div>
+            <div className="flex items-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
+              <span>Journal</span>
+              <span className="w-1 h-1 rounded-full bg-[var(--gold)]" />
+              <span>{blogPost.createdAt}</span>
+            </div>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[var(--charcoal)] leading-tight mb-3">
+              {blogPost.title}
+            </h1>
+            <p className="text-[var(--charcoal)]/60 mb-8">By {blogPost.author}</p>
+
+            <div
+              className="prose-blog text-[var(--charcoal)]/85 leading-loose text-lg md:text-xl"
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
             />
-          </div>
-        </div>
 
-        {/* Article body — expanded, no height limit */}
-        <div className="max-w-3xl mx-auto">
-          <div
-            className="prose-blog text-[var(--charcoal)]/85 leading-loose text-lg md:text-xl"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
-          />
-
-          <div className="mt-14 pt-8 border-t border-[var(--gold)]/40 text-center">
-            <Link
-              to="/blog"
-              className="forma-btn-outline cursor-pointer"
-            >
-              Voir tous les articles
-            </Link>
+            <div className="mt-14 pt-8 border-t border-[var(--gold)]/40">
+              <Link
+                to="/blog"
+                className="forma-btn-outline cursor-pointer"
+              >
+                Voir tous les articles
+              </Link>
+            </div>
           </div>
         </div>
       </article>
