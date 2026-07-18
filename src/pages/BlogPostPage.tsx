@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import DOMPurify from 'dompurify';
 import { useStore } from '../context/StoreContext';
 import { Nav } from '../components/layout/Nav';
 import { Footer } from '../components/layout/Footer';
@@ -96,9 +97,10 @@ export function BlogPostPage() {
                 {blogPost.title}
               </h1>
               
-              <div className="text-[#0F0F0F]/80 leading-relaxed text-lg whitespace-pre-wrap">
-                {blogPost.content}
-              </div>
+              <div
+                className="prose-blog text-[#0F0F0F]/80 leading-relaxed text-lg"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
+              />
             </div>
           </div>
         </div>

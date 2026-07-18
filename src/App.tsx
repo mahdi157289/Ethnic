@@ -5,6 +5,7 @@ import { VideoLoader } from './components/ui/VideoLoader';
 import { HomePage } from './pages/HomePage';
 import { StorePage } from './pages/StorePage';
 import { BlogPostPage } from './pages/BlogPostPage';
+import { BlogListPage } from './pages/BlogListPage';
 
 export default function App() {
   const [appReady, setAppReady] = useState(false);
@@ -19,6 +20,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/store" element={<StorePage />} />
+                <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/:id" element={<BlogPostPage />} />
               </Routes>
             </div>

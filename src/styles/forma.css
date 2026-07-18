@@ -989,3 +989,71 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        /* Editorial blog article typography (rendered HTML from admin) */
+        .prose-blog {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+        }
+
+        .prose-blog p {
+            margin-bottom: 1.25rem;
+            line-height: 1.85;
+        }
+
+        .prose-blog strong,
+        .prose-blog b {
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .prose-blog em,
+        .prose-blog i {
+            font-style: italic;
+        }
+
+        .prose-blog h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--charcoal);
+        }
+
+        .prose-blog h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .prose-blog ul,
+        .prose-blog ol {
+            margin: 0 0 1.25rem 1.5rem;
+            line-height: 1.85;
+        }
+
+        .prose-blog ul { list-style: disc; }
+        .prose-blog ol { list-style: decimal; }
+
+        .prose-blog li { margin-bottom: 0.5rem; }
+
+        .prose-blog a {
+            color: var(--gold);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .prose-blog blockquote {
+            border-left: 3px solid var(--gold);
+            padding-left: 1.25rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: rgba(15, 15, 15, 0.7);
+        }
+
+        .prose-blog img {
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            max-width: 100%;
+        }
