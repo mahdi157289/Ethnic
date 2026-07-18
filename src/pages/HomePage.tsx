@@ -12,7 +12,6 @@ import { Hero } from '../components/storefront/Hero';
 import { Nav } from '../components/layout/Nav';
 import { NewsletterSection } from '../components/storefront/NewsletterSection';
 import { OrderSuccessModal } from '../components/cart/OrderSuccessModal';
-import { QuickViewModal } from '../components/product/QuickViewModal';
 import { AdminFab, AdminPanel } from '../components/admin/AdminPanel';
 import { NotificationToasts } from '../components/ui/NotificationToasts';
 
@@ -48,7 +47,6 @@ export function HomePage() {
       <AdminFab />
       <AdminPanel />
       <CartSidebar />
-      <QuickViewModal />
       <CheckoutModal />
       <OrderSuccessModal />
       <NotificationToasts />
