@@ -80,10 +80,10 @@ export function BlogPostPage() {
           </Link>
         </div>
 
-        {/* Two-column: image left, content right */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        {/* Two-column: image left, content right — columns stretch to equal height */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-stretch">
           {/* Image — left (sticky on desktop) */}
-          <div className="lg:sticky lg:top-28 space-y-8">
+          <div className="lg:flex lg:flex-col lg:min-h-0">
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
               <img
                 src={blogPost.image}
@@ -92,9 +92,9 @@ export function BlogPostPage() {
               />
             </div>
 
-            {/* Product recommendations to inspire the reader — all products, flows until blog ends */}
+            {/* Product recommendations to inspire the reader — scroll within remaining height */}
             {products.length > 0 && (
-              <div>
+              <div className="mt-8 lg:flex-1 lg:min-h-0 lg:overflow-y-auto">
                 <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
                   Vous aimerez aussi
                 </h3>
