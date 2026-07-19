@@ -92,14 +92,14 @@ export function BlogPostPage() {
               />
             </div>
 
-            {/* Product recommendations to inspire the reader */}
+            {/* Product recommendations to inspire the reader — all products, flows until blog ends */}
             {products.length > 0 && (
               <div>
                 <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
                   Vous aimerez aussi
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {products.slice(0, 4).map((product) => (
+                  {products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
