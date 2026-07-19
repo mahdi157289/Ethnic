@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import DOMPurify from 'dompurify';
 import { useStore } from '../context/StoreContext';
@@ -11,6 +12,24 @@ export function BlogPostPage() {
   const { blogPosts, products } = useStore();
 
   const blogPost = blogPosts.find(post => post.id === Number(id));
+
+  // Keep the left column (image + products) bounded by the article's height,
+  // so the product strip can never extend past the blog's end line.
+  const articleRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const syncHeight = () => {
+      const article = articleRef.current;
+      const left = leftColRef.current;
+      if (!article || !left) return;
+      const articleH = article.getBoundingClientRect().height;
+      // Guard: if the blog is very short, at least fit the image (560px)
+      left.style.maxHeight = `${Math.max(articleH, 560)}px`;
+    };
+    syncHeight();
+    window.addEventListener('resize', syncHeight);
+    return () => window.removeEventListener('resize', syncHeight);
+  }, [blogPost?.id]);
 
   if (!blogPost) {
     return (
@@ -80,10 +99,16 @@ export function BlogPostPage() {
           </Link>
         </div>
 
-        {/* Two-column: image left, content right */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-start">
-          {/* Image — left (sticky on desktop) */}
-          <div className="lg:sticky lg:top-28 space-y-8">
+        {/* Two-column: image left, content right.
+            The left column is bounded (via JS) to the article's height,
+            so the product strip can never cross the blog's end line. */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-start pb-10 lg:border-b lg:border-[var(--gold)]/30">
+          {/* Image — left (sticky), bounded to the article height */}
+          <div
+            ref={leftColRef}
+            className="lg:sticky lg:top-28 space-y-8 lg:overflow-hidden"
+            style={{ transition: 'max-height 0.2s ease' }}
+          >
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
               <img
                 src={blogPost.image}
@@ -92,14 +117,14 @@ export function BlogPostPage() {
               />
             </div>
 
-            {/* Product recommendations — capped so it doesn't overrun the article */}
+            {/* Product recommendations — scroll within the bounded column */}
             {products.length > 0 && (
-              <div>
+              <div className="lg:max-h-[calc(100%-620px)] lg:overflow-y-auto pr-1">
                 <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
                   Vous aimerez aussi
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {products.slice(0, 6).map((product) => (
+                  {products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
@@ -107,8 +132,8 @@ export function BlogPostPage() {
             )}
           </div>
 
-          {/* Content — right */}
-          <div>
+          {/* Content — right (its height bounds the left column) */}
+          <div ref={articleRef}>
             <div className="flex items-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
               <span>Journal</span>
               <span className="w-1 h-1 rounded-full bg-[var(--gold)]" />
