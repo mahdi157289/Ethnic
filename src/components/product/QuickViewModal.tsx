@@ -99,7 +99,7 @@ export function QuickViewModal() {
             <button
               type="button"
               onClick={() => {
-                addToCart(quickViewProduct.name, price);
+                addToCart(quickViewProduct.name, price, quickViewProduct.images[0]);
                 closeQuickView();
               }}
               className="forma-btn-primary rounded-xl flex items-center gap-2 !px-8 !md:px-12 !py-3 !md:py-4 !w-auto !inline-flex"

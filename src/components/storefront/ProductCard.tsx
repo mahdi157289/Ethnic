@@ -108,7 +108,7 @@ export function ProductCard({ product }: ProductCardProps) {
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                addToCart(product.name, product.price);
+                addToCart(product.name, product.price, product.images[0]);
               }}
               className="forma-btn-icon w-10 h-10 rounded-full bg-[#E8E0D5] flex items-center justify-center transition-all"
               title="Add to Cart"

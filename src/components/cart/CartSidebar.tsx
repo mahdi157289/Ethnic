@@ -2,7 +2,7 @@ import { useStore } from '../../context/StoreContext';
 import { formatPrice } from '../../utils/formatPrice';
 
 export function CartSidebar() {
-  const { cartOpen, toggleCart, cart, removeFromCart, cartTotal, toggleCheckout } = useStore();
+  const { cartOpen, toggleCart, cart, removeFromCart, updateCartQuantity, cartTotal, toggleCheckout } = useStore();
 
   if (!cartOpen) return null;
 
@@ -26,17 +26,40 @@ export function CartSidebar() {
               <p className="text-[#0F0F0F]/50 text-center py-10">Your cart is empty</p>
             ) : (
               cart.map((item) => (
-                <div key={item.name} className="cart-line-card flex justify-between items-center p-4 bg-[#F5F1EB] rounded-xl">
-                  <div>
-                    <p className="font-medium text-[#0F0F0F]">{item.name}</p>
-                    <p className="text-sm text-[#0F0F0F]/60">
-                      {formatPrice(item.price)} × {item.quantity}
-                    </p>
+                <div key={item.name} className="cart-line-card flex gap-4 items-center p-4 bg-[#F5F1EB] rounded-xl">
+                  <img
+                    src={item.image ?? ''}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover rounded-lg shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-[#0F0F0F] truncate">{item.name}</p>
+                    <p className="text-sm text-[#0F0F0F]/60">{formatPrice(item.price)}</p>
+                    <div className="flex items-center gap-3 mt-2">
+                      <button
+                        type="button"
+                        onClick={() => updateCartQuantity(item.name, -1)}
+                        className="w-7 h-7 flex items-center justify-center rounded-full border border-[#E8E0D5] text-[#0F0F0F] hover:bg-[#0F0F0F] hover:text-white transition-colors"
+                        aria-label="Decrease quantity"
+                      >
+                        −
+                      </button>
+                      <span className="w-6 text-center font-medium text-[#0F0F0F]">{item.quantity}</span>
+                      <button
+                        type="button"
+                        onClick={() => updateCartQuantity(item.name, 1)}
+                        className="w-7 h-7 flex items-center justify-center rounded-full border border-[#E8E0D5] text-[#0F0F0F] hover:bg-[#0F0F0F] hover:text-white transition-colors"
+                        aria-label="Increase quantity"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                   <button
                     type="button"
                     onClick={() => removeFromCart(item.name)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-700 shrink-0"
+                    aria-label="Remove item"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

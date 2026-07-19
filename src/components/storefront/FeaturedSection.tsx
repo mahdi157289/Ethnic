@@ -91,7 +91,7 @@ export function FeaturedSection() {
           </div>
           <button
             type="button"
-            onClick={() => addToCart(featuredProduct.name, price)}
+            onClick={() => addToCart(featuredProduct.name, price, featuredProduct.images[0])}
             className="forma-btn-primary px-10"
           >
             Add to Cart

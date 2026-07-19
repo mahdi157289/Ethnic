@@ -60,8 +60,9 @@ interface StoreContextValue {
   closeQuickView: () => void;
   toggleAdmin: () => void;
   closeAdmin: () => void;
-  addToCart: (name: string, price: number) => void;
+  addToCart: (name: string, price: number, image?: string) => void;
   removeFromCart: (name: string) => void;
+  updateCartQuantity: (name: string, delta: number) => void;
   cartTotal: number;
   cartCount: number;
   filterByCategory: (name: string) => void;
@@ -244,13 +245,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.quantity, 0), [cart]);
 
   const addToCart = useCallback(
-    (name: string, price: number) => {
+    (name: string, price: number, image?: string) => {
       setCart((prev) => {
         const existing = prev.find((i) => i.name === name);
         if (existing) {
           return prev.map((i) => (i.name === name ? { ...i, quantity: i.quantity + 1 } : i));
         }
-        return [...prev, { name, price, quantity: 1 }];
+        return [...prev, { name, price, quantity: 1, image }];
       });
       setCartOpen(true);
       showNotification(`${name} added to cart`, 'success');
@@ -260,6 +261,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const removeFromCart = useCallback((name: string) => {
     setCart((prev) => prev.filter((i) => i.name !== name));
+  }, []);
+
+  const updateCartQuantity = useCallback((name: string, delta: number) => {
+    setCart((prev) =>
+      prev
+        .map((i) => (i.name === name ? { ...i, quantity: Math.max(0, i.quantity + delta) } : i))
+        .filter((i) => i.quantity > 0),
+    );
   }, []);
 
   const toggleCart = useCallback(() => setCartOpen((o) => !o), []);
@@ -741,6 +750,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       closeAdmin,
       addToCart,
       removeFromCart,
+      updateCartQuantity,
       cartTotal,
       cartCount,
       filterByCategory,
@@ -798,6 +808,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setSidebarCollapsed,
       addToCart,
       removeFromCart,
+      updateCartQuantity,
       cartTotal,
       cartCount,
       toggleCart,
