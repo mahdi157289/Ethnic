@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useStore } from '../../context/StoreContext';
+import type { BlogPost } from '../../types';
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
@@ -17,8 +18,9 @@ function readFileAsDataUrl(file: File): Promise<string> {
 }
 
 export function AdminBlogPage() {
-  const { adminPage, blogPosts, addBlogPost, deleteBlogPost, showNotification } = useStore();
+  const { adminPage, blogPosts, addBlogPost, updateBlogPost, deleteBlogPost, showNotification } = useStore();
 
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [author, setAuthor] = useState('');
@@ -36,18 +38,31 @@ export function AdminBlogPage() {
     }
   };
 
-  const submitBlogPost = (e: React.FormEvent) => {
-    e.preventDefault();
-    addBlogPost({
-      title,
-      content,
-      image: image ?? '',
-      author,
-    });
+  const startEdit = (post: BlogPost) => {
+    setEditingId(post.id);
+    setTitle(post.title);
+    setContent(post.content);
+    setAuthor(post.author);
+    setImage(post.image);
+    document.getElementById('admin-blog-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const resetForm = () => {
+    setEditingId(null);
     setTitle('');
     setContent('');
     setAuthor('');
     setImage(null);
+  };
+
+  const submitBlogPost = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editingId !== null) {
+      updateBlogPost(editingId, { title, content, image: image ?? '', author });
+    } else {
+      addBlogPost({ title, content, image: image ?? '', author });
+    }
+    resetForm();
   };
 
   return (
@@ -83,7 +98,14 @@ export function AdminBlogPage() {
                     <td className="px-6 py-4 font-medium text-[#0F0F0F]">{post.title}</td>
                     <td className="px-6 py-4 text-[#0F0F0F]/70">{post.author}</td>
                     <td className="px-6 py-4 text-[#0F0F0F]/70">{post.createdAt}</td>
-                    <td className="px-6 py-4 text-right">
+                    <td className="px-6 py-4 text-right space-x-2">
+                      <button
+                        type="button"
+                        onClick={() => startEdit(post)}
+                        className="p-2 text-[#0F0F0F]/70 hover:bg-[#F5F1EB] rounded-lg"
+                      >
+                        Edit
+                      </button>
                       <button
                         type="button"
                         onClick={() => deleteBlogPost(post.id)}
@@ -100,10 +122,12 @@ export function AdminBlogPage() {
         )}
       </div>
 
-      <div className="mb-12">
+      <div id="admin-blog-form" className="mb-12">
         <h3 className="section-title font-display text-xl text-[#0F0F0F] mb-6">
           <span className="section-dot" />
-          <span className="section-title-text">Add New Blog Post</span>
+          <span className="section-title-text">
+            {editingId !== null ? 'Edit Blog Post' : 'Add New Blog Post'}
+          </span>
           <span className="section-dot" />
         </h3>
         <div className="bg-white p-8 rounded-2xl shadow-sm">
@@ -132,7 +156,7 @@ export function AdminBlogPage() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={6}
-              placeholder="Write your blog post content..."
+              placeholder="Write your blog post content... (use <strong> for bold, <em> for italic)"
               className="w-full px-4 py-3 border border-[#E8E0D5] rounded-xl resize-none"
             />
 
@@ -171,9 +195,20 @@ export function AdminBlogPage() {
               </div>
             )}
 
-            <button type="submit" className="w-full py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80">
-              Add Blog Post
-            </button>
+            <div className="flex gap-4">
+              <button type="submit" className="flex-1 py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80">
+                {editingId !== null ? 'Save Changes' : 'Add Blog Post'}
+              </button>
+              {editingId !== null && (
+                <button
+                  type="button"
+                  onClick={resetForm}
+                  className="px-6 py-4 border border-[#E8E0D5] text-[#0F0F0F]/70 rounded-xl hover:bg-[#F5F1EB]"
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
           </form>
         </div>
       </div>

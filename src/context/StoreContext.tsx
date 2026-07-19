@@ -105,6 +105,12 @@ interface StoreContextValue {
     image: string;
     author: string;
   }) => void;
+  updateBlogPost: (id: number, data: {
+    title: string;
+    content: string;
+    image: string;
+    author: string;
+  }) => void;
   deleteBlogPost: (id: number) => void;
   addGalleryImage: (image: string) => void;
   deleteGalleryImage: (index: number) => void;
@@ -601,6 +607,37 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     [blogPosts, showNotification, saveBlogPosts],
   );
 
+  const updateBlogPost = useCallback(
+    (id: number, data: {
+      title: string;
+      content: string;
+      image: string;
+      author: string;
+    }) => {
+      if (!data.title.trim()) {
+        showNotification('Please enter a blog title', 'error');
+        return;
+      }
+      if (!data.content.trim()) {
+        showNotification('Please enter blog content', 'error');
+        return;
+      }
+      if (!data.image) {
+        showNotification('Please upload a blog image', 'error');
+        return;
+      }
+      const updatedBlogPosts = blogPosts.map((p) =>
+        p.id === id
+          ? { ...p, title: data.title.trim(), content: data.content.trim(), image: data.image, author: data.author.trim() }
+          : p,
+      );
+      setBlogPosts(updatedBlogPosts);
+      saveBlogPosts(updatedBlogPosts);
+      showNotification('Blog post updated successfully', 'success');
+    },
+    [blogPosts, showNotification, saveBlogPosts],
+  );
+
   const addGalleryImage = useCallback(
     (image: string) => {
       if (!image) {
@@ -721,6 +758,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       closeEmailModal,
       getProductById,
       addBlogPost,
+      updateBlogPost,
       deleteBlogPost,
       addGalleryImage,
       deleteGalleryImage,
