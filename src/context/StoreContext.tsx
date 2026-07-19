@@ -252,6 +252,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         }
         return [...prev, { name, price, quantity: 1 }];
       });
+      setCartOpen(true);
       showNotification(`${name} added to cart`, 'success');
     },
     [showNotification],
