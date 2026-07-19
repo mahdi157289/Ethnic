@@ -1,33 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { formatPrice } from '../../utils/formatPrice';
 
-const OPEN_DURATION = 3000; // stay open for 3s before auto-closing
-const EXIT_MS = 300; // smooth close duration
-
 export function CartSidebar() {
   const { cartOpen, toggleCart, cart, removeFromCart, cartTotal, toggleCheckout } = useStore();
-  const [closing, setClosing] = useState(false);
-  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    if (!cartOpen) return;
-    setClosing(false);
-    // Open for OPEN_DURATION, then animate closed
-    openTimer.current = setTimeout(() => {
-      setClosing(true);
-      closeTimer.current = setTimeout(() => {
-        setClosing(false);
-        toggleCart();
-      }, EXIT_MS);
-    }, OPEN_DURATION);
-    return () => {
-      if (openTimer.current) clearTimeout(openTimer.current);
-      if (closeTimer.current) clearTimeout(closeTimer.current);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartOpen]);
 
   if (!cartOpen) return null;
 
@@ -35,11 +10,6 @@ export function CartSidebar() {
     <>
       <div
         id="cart-sidebar"
-        style={{
-          transition: `transform ${EXIT_MS}ms ease, opacity ${EXIT_MS}ms ease`,
-          transform: closing ? 'translateX(100%)' : 'translateX(0)',
-          opacity: closing ? 0 : 1,
-        }}
         className="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl z-50"
       >
         <div className="p-8 h-full flex flex-col">
