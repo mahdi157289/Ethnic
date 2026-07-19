@@ -130,6 +130,15 @@ export function BlogPostPage() {
                 </div>
               </div>
             )}
+
+            <div className="pt-6 text-center">
+              <Link
+                to="/store"
+                className="forma-btn-outline cursor-pointer"
+              >
+                Voir tous les produits
+              </Link>
+            </div>
           </div>
 
           {/* Content — right (its height bounds the left column) */}
