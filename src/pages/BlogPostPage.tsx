@@ -80,10 +80,10 @@ export function BlogPostPage() {
           </Link>
         </div>
 
-        {/* Two-column: image left, content right — columns stretch to equal height */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-stretch">
+        {/* Two-column: image left, content right */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-start">
           {/* Image — left (sticky on desktop) */}
-          <div className="lg:flex lg:flex-col lg:min-h-0">
+          <div className="lg:sticky lg:top-28 space-y-8">
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
               <img
                 src={blogPost.image}
@@ -92,14 +92,14 @@ export function BlogPostPage() {
               />
             </div>
 
-            {/* Product recommendations to inspire the reader — scroll within remaining height */}
+            {/* Product recommendations — capped so it doesn't overrun the article */}
             {products.length > 0 && (
-              <div className="mt-8 lg:flex-1 lg:min-h-0 lg:overflow-y-auto">
+              <div>
                 <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
                   Vous aimerez aussi
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {products.map((product) => (
+                  {products.slice(0, 6).map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
