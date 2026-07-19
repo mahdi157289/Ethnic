@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import DOMPurify from 'dompurify';
 import { useStore } from '../context/StoreContext';
@@ -13,18 +13,23 @@ export function BlogPostPage() {
 
   const blogPost = blogPosts.find(post => post.id === Number(id));
 
-  // Keep the left column (image + products) bounded by the article's height,
-  // so the product strip can never extend past the blog's end line.
+  // Keep the product strip bounded by the article's height (via the inner
+  // scroll container) so it can never extend past the blog's end line,
+  // while cards are never sliced in half.
   const articleRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
+  const productScrollRef = useRef<HTMLDivElement>(null);
+  const [showFade, setShowFade] = useState(false);
   useEffect(() => {
     const syncHeight = () => {
       const article = articleRef.current;
-      const left = leftColRef.current;
-      if (!article || !left) return;
+      const scrollEl = productScrollRef.current;
+      if (!article || !scrollEl) return;
       const articleH = article.getBoundingClientRect().height;
-      // Guard: if the blog is very short, at least fit the image (560px)
-      left.style.maxHeight = `${Math.max(articleH, 560)}px`;
+      // Reserve: image 560px (lg), button area ~80px, heading ~40px, gap 32px
+      const scrollH = Math.max(articleH - 560 - 80 - 40 - 32, 200);
+      scrollEl.style.maxHeight = `${scrollH}px`;
+      setShowFade(scrollEl.scrollHeight > scrollEl.clientHeight);
     };
     syncHeight();
     window.addEventListener('resize', syncHeight);
@@ -106,7 +111,7 @@ export function BlogPostPage() {
           {/* Image — left (sticky), bounded to the article height */}
           <div
             ref={leftColRef}
-            className="lg:sticky lg:top-28 space-y-8 lg:overflow-hidden"
+            className="lg:sticky lg:top-28 space-y-8"
             style={{ transition: 'max-height 0.2s ease' }}
           >
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
@@ -117,17 +122,25 @@ export function BlogPostPage() {
               />
             </div>
 
-            {/* Product recommendations — scroll within the bounded column */}
+            {/* Product recommendations — scroll within the inner bounded area */}
             {products.length > 0 && (
-              <div className="lg:max-h-[calc(100%-620px)] lg:overflow-y-auto pr-1">
-                <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
-                  Vous aimerez aussi
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
+              <div className="relative">
+                <div
+                  ref={productScrollRef}
+                  className="lg:overflow-y-auto pr-1"
+                >
+                  <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
+                    Vous aimerez aussi
+                  </h3>
+                  <div className="grid grid-cols-2 gap-4 pb-2">
+                    {products.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
                 </div>
+                {showFade && (
+                  <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[var(--cream)] to-transparent" />
+                )}
               </div>
             )}
 
