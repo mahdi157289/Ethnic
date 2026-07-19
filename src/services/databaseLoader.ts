@@ -178,6 +178,12 @@ class MockDatabaseService implements DatabaseService {
     if (localStorageData && localStorageData.length > 0) {
       return localStorageData;
     }
+    const adminBlogPosts = (adminData as Record<string, unknown>)['db_blogposts-seed.json'] as
+      | BlogPost[]
+      | undefined;
+    if (Array.isArray(adminBlogPosts) && adminBlogPosts.length > 0) {
+      return adminBlogPosts;
+    }
     // Fallback to seed data
     return getSeedBlogPosts();
   }
@@ -186,6 +192,12 @@ class MockDatabaseService implements DatabaseService {
     const localStorageData = this.loadFromLocalStorage<FeaturedProduct>('db_featured-seed.json');
     if (localStorageData) {
       return localStorageData;
+    }
+    const adminFeatured = (adminData as Record<string, unknown>)['db_featured-seed.json'] as
+      | FeaturedProduct
+      | undefined;
+    if (adminFeatured && adminFeatured.name) {
+      return adminFeatured;
     }
     // Fallback to seed data
     const seedProducts = buildSeedProducts();
@@ -205,6 +217,12 @@ class MockDatabaseService implements DatabaseService {
     const localStorageData = this.loadFromLocalStorage<string[]>('db_welcome-seed.json');
     if (localStorageData && localStorageData.length > 0) {
       return localStorageData;
+    }
+    const adminWelcome = (adminData as Record<string, unknown>)['db_welcome-seed.json'] as
+      | string[]
+      | undefined;
+    if (Array.isArray(adminWelcome) && adminWelcome.length > 0) {
+      return adminWelcome;
     }
     // Fallback to seed data
     return getSeedWelcomeImages();
