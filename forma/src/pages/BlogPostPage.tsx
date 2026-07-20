@@ -24,10 +24,9 @@ export function BlogPostPage() {
       const article = articleRef.current;
       const scrollEl = productScrollRef.current;
       if (!article || !scrollEl) return;
-      // On desktop (lg+, two-column) the products sit under the image and must
-      // show in full — never clamp them into a scroll box.
-      if (window.innerWidth >= 1024) {
-        scrollEl.style.maxHeight = 'none';
+      if (!window.matchMedia('(min-width: 1024px)').matches) {
+        // Mobile/tablet: let the strip flow normally, no bounding
+        scrollEl.style.maxHeight = '';
         setShowFade(false);
         return;
       }
@@ -39,7 +38,12 @@ export function BlogPostPage() {
     };
     syncHeight();
     window.addEventListener('resize', syncHeight);
-    return () => window.removeEventListener('resize', syncHeight);
+    const mq = window.matchMedia('(min-width: 1024px)');
+    mq.addEventListener('change', syncHeight);
+    return () => {
+      window.removeEventListener('resize', syncHeight);
+      mq.removeEventListener('change', syncHeight);
+    };
   }, [blogPost?.id]);
 
   if (!blogPost) {
@@ -110,11 +114,11 @@ export function BlogPostPage() {
           </Link>
         </div>
 
-        {/* Grid: on mobile stacks in DOM order (image → article → products);
-            on desktop, image-left (sticky) / content-right, products under image. */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 pb-10 lg:border-b lg:border-[var(--gold)]/30">
-          {/* Image — block 1 (top on mobile, top-left + sticky on desktop) */}
-          <div className="lg:sticky lg:top-28 lg:col-start-1 lg:row-start-1 self-start">
+        {/* Grid: image + article on top (desktop two-column), products below image.
+            On mobile (grid-cols-1) they flow in DOM order: image → article → products. */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-start pb-10 lg:border-b lg:border-[var(--gold)]/30">
+          {/* Image — top-left on desktop, first on mobile */}
+          <div className="lg:col-start-1 lg:row-start-1 lg:sticky lg:top-28">
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
               <img
                 src={blogPost.image}
@@ -124,7 +128,7 @@ export function BlogPostPage() {
             </div>
           </div>
 
-          {/* Content — block 2 (article; top-right on desktop) */}
+          {/* Content — top-right on desktop, second on mobile (its height bounds the products) */}
           <div ref={articleRef} className="lg:col-start-2 lg:row-start-1">
             <div className="flex items-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
               <span>Journal</span>
@@ -151,17 +155,13 @@ export function BlogPostPage() {
             </div>
           </div>
 
-          {/* Product recommendations — block 3 (after article on mobile, under image on desktop) */}
-          <div className="lg:col-start-1 lg:row-start-2 lg:mt-8">
-            {products.length > 0 && (
+          {/* Product recommendations — below the image on desktop (col 1, row 2),
+              after the article on mobile so the content is never buried. */}
+          {products.length > 0 && (
+            <div className="lg:col-start-1 lg:row-start-2">
               <div className="relative">
-                <div
-                  ref={productScrollRef}
-                  className="lg:overflow-y-auto pr-1"
-                >
-                  <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
-                    Vous aimerez aussi
-                  </h3>
+                <div ref={productScrollRef} className="lg:overflow-y-auto pr-1">
+                  <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">Vous aimerez aussi</h3>
                   <div className="grid grid-cols-2 gap-4 pb-2">
                     {products.map((product) => (
                       <ProductCard key={product.id} product={product} />
@@ -172,17 +172,11 @@ export function BlogPostPage() {
                   <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[var(--cream)] to-transparent" />
                 )}
               </div>
-            )}
-
-            <div className="pt-6 text-center">
-              <Link
-                to="/store"
-                className="forma-btn-outline cursor-pointer"
-              >
-                Voir tous les produits
-              </Link>
+              <div className="pt-6 text-center">
+                <Link to="/store" className="forma-btn-outline cursor-pointer">Voir tous les produits</Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </article>
       <Footer />
