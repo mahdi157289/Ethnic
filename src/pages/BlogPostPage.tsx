@@ -17,6 +17,7 @@ export function BlogPostPage() {
   // scroll container) so it can never extend past the blog's end line,
   // while cards are never sliced in half.
   const articleRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
   const productScrollRef = useRef<HTMLDivElement>(null);
   const [showFade, setShowFade] = useState(false);
   useEffect(() => {
@@ -24,10 +25,9 @@ export function BlogPostPage() {
       const article = articleRef.current;
       const scrollEl = productScrollRef.current;
       if (!article || !scrollEl) return;
-      // On desktop (lg+, two-column) the products sit under the image and must
-      // show in full — never clamp them into a scroll box.
-      if (window.innerWidth >= 1024) {
-        scrollEl.style.maxHeight = 'none';
+      if (!window.matchMedia('(min-width: 1024px)').matches) {
+        // Mobile/tablet: let the strip flow normally, no bounding
+        scrollEl.style.maxHeight = '';
         setShowFade(false);
         return;
       }
@@ -39,7 +39,12 @@ export function BlogPostPage() {
     };
     syncHeight();
     window.addEventListener('resize', syncHeight);
-    return () => window.removeEventListener('resize', syncHeight);
+    const mq = window.matchMedia('(min-width: 1024px)');
+    mq.addEventListener('change', syncHeight);
+    return () => {
+      window.removeEventListener('resize', syncHeight);
+      mq.removeEventListener('change', syncHeight);
+    };
   }, [blogPost?.id]);
 
   if (!blogPost) {
@@ -110,11 +115,16 @@ export function BlogPostPage() {
           </Link>
         </div>
 
-        {/* Grid: on mobile stacks in DOM order (image → article → products);
-            on desktop, image-left (sticky) / content-right, products under image. */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 pb-10 lg:border-b lg:border-[var(--gold)]/30">
-          {/* Image — block 1 (top on mobile, top-left + sticky on desktop) */}
-          <div className="lg:sticky lg:top-28 lg:col-start-1 lg:row-start-1 self-start">
+        {/* Two-column: image left, content right.
+            The left column is bounded (via JS) to the article's height,
+            so the product strip can never cross the blog's end line. */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-start pb-10 lg:border-b lg:border-[var(--gold)]/30">
+          {/* Image — left (sticky), bounded to the article height */}
+          <div
+            ref={leftColRef}
+            className="lg:sticky lg:top-28 space-y-8"
+            style={{ transition: 'max-height 0.2s ease' }}
+          >
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
               <img
                 src={blogPost.image}
@@ -122,37 +132,8 @@ export function BlogPostPage() {
                 className="w-full h-[300px] md:h-[440px] lg:h-[560px] object-cover"
               />
             </div>
-          </div>
 
-          {/* Content — block 2 (article; top-right on desktop) */}
-          <div ref={articleRef} className="lg:col-start-2 lg:row-start-1">
-            <div className="flex items-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
-              <span>Journal</span>
-              <span className="w-1 h-1 rounded-full bg-[var(--gold)]" />
-              <span>{blogPost.createdAt}</span>
-            </div>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[var(--charcoal)] leading-tight mb-3">
-              {blogPost.title}
-            </h1>
-            <p className="text-[var(--charcoal)]/60 mb-8">By {blogPost.author}</p>
-
-            <div
-              className="prose-blog text-[var(--charcoal)]/85 leading-loose text-lg md:text-xl"
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
-            />
-
-            <div className="mt-14 pt-8 border-t border-[var(--gold)]/40">
-              <Link
-                to="/blog"
-                className="forma-btn-outline cursor-pointer"
-              >
-                Voir tous les articles
-              </Link>
-            </div>
-          </div>
-
-          {/* Product recommendations — block 3 (after article on mobile, under image on desktop) */}
-          <div className="lg:col-start-1 lg:row-start-2 lg:mt-8">
+            {/* Product recommendations — scroll within the inner bounded area */}
             {products.length > 0 && (
               <div className="relative">
                 <div
@@ -180,6 +161,33 @@ export function BlogPostPage() {
                 className="forma-btn-outline cursor-pointer"
               >
                 Voir tous les produits
+              </Link>
+            </div>
+          </div>
+
+          {/* Content — right (its height bounds the left column) */}
+          <div ref={articleRef}>
+            <div className="flex items-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
+              <span>Journal</span>
+              <span className="w-1 h-1 rounded-full bg-[var(--gold)]" />
+              <span>{blogPost.createdAt}</span>
+            </div>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[var(--charcoal)] leading-tight mb-3">
+              {blogPost.title}
+            </h1>
+            <p className="text-[var(--charcoal)]/60 mb-8">By {blogPost.author}</p>
+
+            <div
+              className="prose-blog text-[var(--charcoal)]/85 leading-loose text-lg md:text-xl"
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
+            />
+
+            <div className="mt-14 pt-8 border-t border-[var(--gold)]/40">
+              <Link
+                to="/blog"
+                className="forma-btn-outline cursor-pointer"
+              >
+                Voir tous les articles
               </Link>
             </div>
           </div>
