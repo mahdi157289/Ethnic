@@ -1,0 +1,15 @@
+{
+  "id": 10000,
+  "name": "Collier Signature",
+  "price": 120,
+  "salePrice": 100,
+  "description": "Notre bijou phare de la semaine — sélectionné pour son artisanat, son éclat et sa présence unique.",
+  "images": [
+    "http://localhost:5173/_assets/571213930_1231364232366527_2109138059830827614_n-CZesuGIG.jpg",
+    "http://localhost:5173/_assets/576374205_1237419018427715_5372252522487259330_n-DE7k3fax.jpg"
+  ],
+  "category": "Colliers",
+  "type": "featured",
+  "tags": ["Bestseller", "Édition Limitée"],
+  "rating": 5
+}

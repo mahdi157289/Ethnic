@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Colliers",
+    "image": "http://localhost:5173/_assets/571213930_1231364232366527_2109138059830827614_n-CZesuGIG.jpg",
+    "count": 2
+  },
+  {
+    "id": 2,
+    "name": "Bracelets",
+    "image": "http://localhost:5173/_assets/580653250_1245049280998022_4822892386110758446_n-BVnGO4Hh.jpg",
+    "count": 2
+  },
+  {
+    "id": 3,
+    "name": "Boucles",
+    "image": "http://localhost:5173/_assets/591048340_1258603809642569_3829171289695157483_n-CQpUmYrW.jpg",
+    "count": 2
+  },
+  {
+    "id": 4,
+    "name": "Bagues",
+    "image": "http://localhost:5173/_assets/605465823_1280980504071566_1880378652509185128_n-Dm_1fIQq.jpg",
+    "count": 3
+  },
+  {
+    "id": 5,
+    "name": "Broches",
+    "image": "http://localhost:5173/_assets/615335044_1291601899676093_2589112318136094017_n-BTw8rXyT.jpg",
+    "count": 1
+  },
+  {
+    "id": 6,
+    "name": "Parures",
+    "image": "http://localhost:5173/_assets/615571975_1291969626305987_1674098473504197529_n-Cif0-u4Y.jpg",
+    "count": 1
+  }
+]

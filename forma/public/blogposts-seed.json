@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "L'Artisanat au Cœur de nos Bijoux",
+    "content": "Découvrez comment chaque pièce est créée avec passion et savoir-faire ancestral dans notre atelier Ethnic. Nous mettons un point d'honneur à préserver les techniques traditionnelles tout en ajoutant une touche moderne.",
+    "image": "http://localhost:5173/_assets/571213930_1231364232366527_2109138059830827614_n-CZesuGIG.jpg",
+    "author": "Équipe Ethnic",
+    "createdAt": "15/06/2026"
+  },
+  {
+    "id": 2,
+    "title": "Comment Entretenir vos Bijoux Éthniques",
+    "content": "Conseils pratiques pour prendre soin de vos bijoux et conserver leur éclat au fil du temps. Nettoyage, rangement, précautions à prendre — on vous dit tout !",
+    "image": "http://localhost:5173/_assets/576374205_1237419018427715_5372252522487259330_n-DE7k3fax.jpg",
+    "author": "Marie Dubois",
+    "createdAt": "20/06/2026"
+  },
+  {
+    "id": 3,
+    "title": "Notre Nouvelle Collection Été 2026",
+    "content": "Présentation de notre toute nouvelle collection inspirée par les voyages et les cultures du monde. Couleurs vibrantes, designs uniques — ne la ratez pas !",
+    "image": "http://localhost:5173/_assets/576855430_1238188108350806_1234453850304048442_n-v9mq-ln3.jpg",
+    "author": "Lucas Martin",
+    "createdAt": "22/06/2026"
+  }
+]

@@ -1,0 +1,144 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Collier 01",
+      "price": 120,
+      "description": "Bijou fini à la main dans notre atelier Ethnic, mêlant artisanat traditionnel et élégance contemporaine.",
+      "images": [
+        "http://localhost:5173/_assets/571213930_1231364232366527_2109138059830827614_n-CZesuGIG.jpg",
+        "http://localhost:5173/_assets/576374205_1237419018427715_5372252522487259330_n-DE7k3fax.jpg"
+      ],
+      "category": "Colliers",
+      "type": "normal",
+      "tags": ["Bestseller", "Artisanal"],
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Collier 02",
+      "price": 180,
+      "description": "Création artisanale conçue pour sublimer votre style avec des finitions précises et durables.",
+      "images": [
+        "http://localhost:5173/_assets/576855430_1238188108350806_1234453850304048442_n-v9mq-ln3.jpg",
+        "http://localhost:5173/_assets/580653250_1245049280998022_4822892386110758446_n-BVnGO4Hh.jpg"
+      ],
+      "category": "Colliers",
+      "type": "normal",
+      "tags": ["Nouveau"],
+      "rating": 4
+    },
+    {
+      "id": 3,
+      "name": "Collier 03",
+      "price": 250,
+      "description": "Pièce Ethnic exclusive — matériaux nobles, savoir-faire ancestral et silhouette intemporelle.",
+      "images": [
+        "http://localhost:5173/_assets/580733069_1245051070997843_6039157899864910099_n-QwuRX6NJ.jpg",
+        "http://localhost:5173/_assets/580851786_1245050634331220_2580292775834427010_n-DkbSXHR9.jpg"
+      ],
+      "category": "Colliers",
+      "type": "normal",
+      "tags": ["Bestseller"],
+      "rating": 5
+    },
+    {
+      "id": 4,
+      "name": "Bracelet 01",
+      "price": 320,
+      "description": "Réalisé en petites séries avec une attention particulière aux détails, textures et éclat.",
+      "images": [
+        "http://localhost:5173/_assets/581772704_1245050987664518_6957091294094526148_n-BxSwWwxy.jpg",
+        "http://localhost:5173/_assets/581779267_1245049220998028_6534375125776149967_n-ChMspYzc.jpg"
+      ],
+      "category": "Bracelets",
+      "type": "normal",
+      "tags": ["Artisanal", "Édition Limitée"],
+      "rating": 4
+    },
+    {
+      "id": 5,
+      "name": "Bracelet 02",
+      "price": 420,
+      "description": "Bijou fini à la main dans notre atelier Ethnic, mêlant artisanat traditionnel et élégance contemporaine.",
+      "images": [
+        "http://localhost:5173/_assets/581822941_17961725385005600_3507276538688844979_n-Dz6-acQ-.jpg",
+        "http://localhost:5173/_assets/581937108_1245051270997823_676037892094142212_n-C3EGtOgZ.jpg"
+      ],
+      "category": "Bracelets",
+      "type": "normal",
+      "tags": ["Nouveau"],
+      "rating": 5
+    },
+    {
+      "id": 6,
+      "name": "Boucle 01",
+      "price": 580,
+      "description": "Création artisanale conçue pour sublimer votre style avec des finitions précises et durables.",
+      "images": [
+        "http://localhost:5173/_assets/581974756_1245050817664535_8474305704030833365_n-pz9vOpvW.jpg",
+        "http://localhost:5173/_assets/587776376_17963010123005600_5962743468755305556_n-B8dHEtBr.jpg"
+      ],
+      "category": "Boucles",
+      "type": "normal",
+      "tags": ["Artisanal"],
+      "rating": 4
+    },
+    {
+      "id": 7,
+      "name": "Boucle 02",
+      "price": 750,
+      "description": "Pièce Ethnic exclusive — matériaux nobles, savoir-faire ancestral et silhouette intemporelle.",
+      "images": [
+        "http://localhost:5173/_assets/588433982_1256223423213941_2979019194869180752_n-C16SEYId.jpg",
+        "http://localhost:5173/_assets/589611891_1257000006469616_2649942376540376515_n-D-cr3qWi.jpg"
+      ],
+      "category": "Boucles",
+      "type": "normal",
+      "tags": ["Édition Limitée", "Bestseller"],
+      "rating": 5
+    },
+    {
+      "id": 8,
+      "name": "Bague 01",
+      "price": 890,
+      "description": "Réalisé en petites séries avec une attention particulière aux détails, textures et éclat.",
+      "images": [
+        "http://localhost:5173/_assets/591048340_1258603809642569_3829171289695157483_n-CQpUmYrW.jpg",
+        "http://localhost:5173/_assets/596929485_1264547125714904_8486615166712785267_n-D7S8ExHX.jpg"
+      ],
+      "category": "Bagues",
+      "type": "normal",
+      "tags": [],
+      "rating": 4
+    },
+    {
+      "id": 9,
+      "name": "Bague 02",
+      "price": 1150,
+      "description": "Bijou fini à la main dans notre atelier Ethnic, mêlant artisanat traditionnel et élégance contemporaine.",
+      "images": [
+        "http://localhost:5173/_assets/605465823_1280980504071566_1880378652509185128_n-Dm_1fIQq.jpg",
+        "http://localhost:5173/_assets/615335044_1291601899676093_2589112318136094017_n-BTw8rXyT.jpg"
+      ],
+      "category": "Bagues",
+      "type": "normal",
+      "tags": ["Nouveau"],
+      "rating": 5
+    },
+    {
+      "id": 10,
+      "name": "Bague 03",
+      "price": 1380,
+      "description": "Création artisanale conçue pour sublimer votre style avec des finitions précises et durables.",
+      "images": [
+        "http://localhost:5173/_assets/615571975_1291969626305987_1674098473504197529_n-Cif0-u4Y.jpg",
+        "http://localhost:5173/_assets/618242129_1300071832162433_1879794587681254430_n-DWdJ7su7.jpg"
+      ],
+      "category": "Bagues",
+      "type": "normal",
+      "tags": ["Bestseller"],
+      "rating": 5
+    }
+  ]
+}
