@@ -1,8 +1,8 @@
 - [x] Height-sync `max-height` only applies on `lg` (≥1024px); on mobile inline `max-height` is cleared
 - [x] On mobile, `showFade` is false (no fade overlay)
 - [x] Product strip flows in normal document order on mobile with no overlap of the article
-- [ ] No product card is clipped or layered on top of blog content at 375px
-- [ ] No product card is clipped or layered on top of blog content at 768px
+- [x] No product card is clipped or layered on top of blog content at 375px
+- [x] No product card is clipped or layered on top of blog content at 768px
 - [x] A `matchMedia` change listener re-syncs layout when crossing the `lg` breakpoint (and is cleaned up on unmount)
 - [x] `npm run build` passes with no TypeScript errors
 - [x] Desktop (≥1024px) still shows the bounded scroll + fade exactly as before
