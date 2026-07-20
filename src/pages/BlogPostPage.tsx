@@ -24,6 +24,13 @@ export function BlogPostPage() {
       const article = articleRef.current;
       const scrollEl = productScrollRef.current;
       if (!article || !scrollEl) return;
+      // On desktop (lg+, two-column) the products sit under the image and must
+      // show in full — never clamp them into a scroll box.
+      if (window.innerWidth >= 1024) {
+        scrollEl.style.maxHeight = 'none';
+        setShowFade(false);
+        return;
+      }
       const articleH = article.getBoundingClientRect().height;
       // Reserve: image 560px (lg), button area ~80px, heading ~40px, gap 32px
       const scrollH = Math.max(articleH - 560 - 80 - 40 - 32, 200);
