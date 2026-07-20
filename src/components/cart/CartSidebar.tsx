@@ -10,7 +10,7 @@ export function CartSidebar() {
     <>
       <div
         id="cart-sidebar"
-        className="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl z-50"
+        className="fixed top-0 right-0 h-full w-full max-w-[90vw] sm:w-96 bg-white shadow-2xl z-50"
       >
         <div className="p-8 h-full flex flex-col">
           <div className="flex justify-between items-center mb-8">

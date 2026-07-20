@@ -17,7 +17,7 @@ export function Modal({
 }: ModalProps) {
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center z-50 transition-all duration-500 ${
+      className={`fixed inset-0 flex items-center justify-center p-4 overflow-y-auto z-50 transition-all duration-500 ${
         open ? '' : 'opacity-0 pointer-events-none'
       } ${overlayClassName}`}
       onClick={onClose}
@@ -27,7 +27,7 @@ export function Modal({
       <div
         className={`relative transform transition-all duration-500 ${
           open ? 'scale-100' : 'scale-95'
-        } ${contentClassName}`}
+        } ${contentClassName} my-auto`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}

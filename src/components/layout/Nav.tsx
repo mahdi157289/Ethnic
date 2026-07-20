@@ -146,14 +146,14 @@ export function Nav() {
         </div>
         
         <div className="flex items-center gap-4">
-          <button type="button" className="text-white hover:opacity-60 transition-opacity">
+          <button type="button" className="p-2 cursor-pointer text-white hover:opacity-60 transition-opacity">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </button>
           <button
             type="button"
-            className="relative text-white hover:opacity-60 transition-opacity"
+            className="p-2 cursor-pointer relative text-white hover:opacity-60 transition-opacity"
             onClick={toggleCart}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -167,7 +167,7 @@ export function Nav() {
           {/* Mobile Hamburger */}
           <button
             type="button"
-            className="md:hidden text-white hover:opacity-60 transition-opacity"
+            className="md:hidden p-2 cursor-pointer text-white hover:opacity-60 transition-opacity"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
