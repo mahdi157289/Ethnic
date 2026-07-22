@@ -25,11 +25,11 @@ export function CollectionSection({ hideTitle = false }: CollectionSectionProps)
                 <span className="section-dot" />
               </h2>
             )}
-            <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-2 md:gap-3 flex-nowrap overflow-x-auto pb-2 scrollbar-hide">
               <button
                 type="button"
                 onClick={clearCategoryFilter}
-                className={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300${!currentCategoryFilter ? ' active' : ''}`}
+                className={`filter-btn px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0${!currentCategoryFilter ? ' active' : ''}`}
               >
                 All
               </button>
@@ -38,7 +38,7 @@ export function CollectionSection({ hideTitle = false }: CollectionSectionProps)
                   key={cat.id}
                   type="button"
                   onClick={() => filterByCategory(cat.name)}
-                  className={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300${
+                  className={`filter-btn px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0${
                     currentCategoryFilter === cat.name ? ' active' : ''
                   }`}
                 >
