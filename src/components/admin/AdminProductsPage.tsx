@@ -214,20 +214,20 @@ export function AdminProductsPage() {
   };
 
   return (
-    <div id="admin-page-products" className={`admin-page p-8${adminPage === 'products' ? ' active' : ''}`}>
-      <div className="mb-12">
-        <h3 className="section-title font-display text-xl text-[#0F0F0F] mb-6">
+    <div id="admin-page-products" className={`admin-page p-4 md:p-8${adminPage === 'products' ? ' active' : ''}`}>
+      <div className="mb-8 md:mb-12">
+        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
           <span className="section-dot" />
           <span className="section-title-text">Manage Categories</span>
           <span className="section-dot" />
         </h3>
-        <div className="bg-white p-6 rounded-2xl shadow-sm">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6" id="categories-list">
+        <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-6" id="categories-list">
             {categories.map((cat) => (
               <div key={cat.id} className="category-card">
-                <img src={cat.image} alt={cat.name} className="w-14 h-14 rounded-xl object-cover" />
-                <div className="flex-1">
-                  <p className="font-medium text-[#0F0F0F]">{cat.name}</p>
+                <img src={cat.image} alt={cat.name} className="w-12 h-12 md:w-14 md:h-14 rounded-xl object-cover flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-[#0F0F0F] text-sm truncate">{cat.name}</p>
                   <p className="text-xs text-[#0F0F0F]/50">
                     {products.filter((p) => p.category === cat.name).length} products
                   </p>
@@ -235,14 +235,14 @@ export function AdminProductsPage() {
                 <button
                   type="button"
                   onClick={() => deleteCategory(cat.id)}
-                  className="w-8 h-8 rounded-full bg-red-50 text-red-500 hover:bg-red-100 flex items-center justify-center"
+                  className="w-8 h-8 rounded-full bg-red-50 text-red-500 hover:bg-red-100 flex items-center justify-center flex-shrink-0"
                 >
                   ×
                 </button>
               </div>
             ))}
           </div>
-          <div className="border-t border-[#E8E0D5] pt-6">
+          <div className="border-t border-[#E8E0D5] pt-4 md:pt-6">
             <input
               type="text"
               value={categoryName}
@@ -273,7 +273,7 @@ export function AdminProductsPage() {
             <button
               type="button"
               onClick={submitCategory}
-              className="w-full px-6 py-3 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80"
+              className="w-full px-6 py-3 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80 text-sm"
             >
               Add Category
             </button>
@@ -281,40 +281,42 @@ export function AdminProductsPage() {
         </div>
       </div>
 
-      <div className="mb-12">
-        <h3 className="section-title font-display text-xl text-[#0F0F0F] mb-6">
+      <div className="mb-8 md:mb-12">
+        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
           <span className="section-dot" />
           <span className="section-title-text">
             {editingProduct ? 'Edit Product' : 'Add New Product'}
           </span>
           <span className="section-dot" />
         </h3>
-        <div className="bg-white p-8 rounded-2xl shadow-sm">
-          <form onSubmit={submitProduct} className="space-y-6">
-            <div className="bg-[#F5F1EB] p-6 rounded-xl text-center">
-              <div className="flex flex-wrap gap-6 justify-center">
-                <label className="flex items-center gap-3 cursor-pointer">
+        <div className="bg-white p-4 md:p-8 rounded-2xl shadow-sm">
+          <form onSubmit={submitProduct} className="space-y-4 md:space-y-6">
+            <div className="bg-[#F5F1EB] p-4 md:p-6 rounded-xl text-center">
+              <div className="flex flex-wrap gap-4 md:gap-6 justify-center">
+                <label className="flex items-center gap-2 md:gap-3 cursor-pointer">
                   <input
                     type="radio"
                     name="product-type"
                     checked={productType === 'normal'}
                     onChange={() => setProductType('normal')}
+                    className="w-4 h-4"
                   />
-                  <span>Bijou Standard</span>
+                  <span className="text-sm">Bijou Standard</span>
                 </label>
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label className="flex items-center gap-2 md:gap-3 cursor-pointer">
                   <input
                     type="radio"
                     name="product-type"
                     checked={productType === 'featured'}
                     onChange={() => setProductType('featured')}
+                    className="w-4 h-4"
                   />
-                  <span>Bijou de la Semaine</span>
+                  <span className="text-sm">Bijou de la Semaine</span>
                 </label>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-6">
               <input
                 type="text"
                 required
@@ -331,9 +333,7 @@ export function AdminProductsPage() {
               >
                 <option value="">Select category</option>
                 {categories.map((c) => (
-                  <option key={c.id} value={c.name}>
-                    {c.name}
-                  </option>
+                  <option key={c.id} value={c.name}>{c.name}</option>
                 ))}
               </select>
               <input
@@ -368,16 +368,9 @@ export function AdminProductsPage() {
             <div
               className={`upload-area${dragOver ? ' dragover' : ''}`}
               onClick={() => productImagesRef.current?.click()}
-              onDragOver={(e) => {
-                e.preventDefault();
-                setDragOver(true);
-              }}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
               onDragLeave={() => setDragOver(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setDragOver(false);
-                handleProductImages(e.dataTransfer.files);
-              }}
+              onDrop={(e) => { e.preventDefault(); setDragOver(false); handleProductImages(e.dataTransfer.files); }}
             >
               <input
                 ref={productImagesRef}
@@ -387,21 +380,19 @@ export function AdminProductsPage() {
                 className="hidden"
                 onChange={(e) => handleProductImages(e.target.files)}
               />
-              <p className="text-[#0F0F0F] font-medium">Click to upload images</p>
-              <p className="text-[#0F0F0F]/50 text-sm">or drag and drop • PNG, JPG up to 5MB</p>
+              <p className="text-[#0F0F0F] font-medium text-sm">Click to upload images</p>
+              <p className="text-[#0F0F0F]/50 text-xs md:text-sm">or drag and drop • PNG, JPG up to 5MB</p>
             </div>
             <div className="upload-preview">
               {uploadedImages.map((img, idx) => (
                 <div key={idx} className="upload-preview-item">
                   <img src={img} alt={`Preview ${idx + 1}`} />
-                  <button type="button" onClick={() => setUploadedImages((p) => p.filter((_, i) => i !== idx))}>
-                    ×
-                  </button>
+                  <button type="button" onClick={() => setUploadedImages((p) => p.filter((_, i) => i !== idx))}>×</button>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               <div className="flex flex-wrap gap-2">
                 {productTags.map((tag, idx) => (
                   <span
@@ -431,17 +422,16 @@ export function AdminProductsPage() {
                 <button
                   type="button"
                   onClick={addTag}
-                  className="px-6 py-3 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80"
+                  className="px-5 py-3 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80 text-sm"
                 >
                   Add
                 </button>
               </div>
             </div>
 
-            {/* Rating Section */}
             <div className="space-y-3">
               <label className="text-sm font-medium text-[#0F0F0F]">Product Rating</label>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 md:gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star}
@@ -451,32 +441,30 @@ export function AdminProductsPage() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-8 w-8"
+                      className="h-7 w-7 md:h-8 md:w-8"
                       viewBox="0 0 24 24"
                       fill={star <= productRating ? '#C4A35A' : '#E8E0D5'}
                     >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-3 md:gap-4">
               {editingProduct && (
                 <button
                   type="button"
                   onClick={cancelEditing}
-                  className="flex-1 py-4 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300"
+                  className="flex-1 py-3 md:py-4 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 text-sm md:text-base"
                 >
                   Cancel
                 </button>
               )}
               <button
                 type="submit"
-                className="flex-1 py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80"
+                className="flex-1 py-3 md:py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80 text-sm md:text-base"
               >
                 {editingProduct ? 'Update Product' : 'Add Product'}
               </button>
@@ -485,40 +473,40 @@ export function AdminProductsPage() {
         </div>
       </div>
 
-      <div className="mb-12">
-        <h3 className="section-title font-display text-xl text-[#0F0F0F] mb-6">
+      <div className="mb-8 md:mb-12">
+        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
           <span className="section-dot" />
           <span className="section-title-text">Welcome Page Images</span>
           <span className="section-dot" />
         </h3>
         {welcomeImages.length === 0 ? (
-          <div className="bg-white p-8 rounded-2xl shadow-sm text-center">
-            <p className="text-[#0F0F0F]/50">No welcome images yet. Add your first image below!</p>
+          <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm text-center">
+            <p className="text-[#0F0F0F]/50 text-sm">No welcome images yet. Add your first image below!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
             {welcomeImages.map((img, index) => (
-              <div key={index} className="bg-white rounded-2xl p-4 shadow-sm relative">
+              <div key={index} className="bg-white rounded-2xl p-3 md:p-4 shadow-sm relative">
                 <img
                   src={img}
                   alt={`Welcome ${index + 1}`}
-                  className="w-full h-48 object-cover rounded-xl"
+                  className="w-full h-36 md:h-48 object-cover rounded-xl"
                 />
                 <button
                   type="button"
                   onClick={() => startEditWelcomeImage(index)}
-                  className="absolute top-4 left-4 p-2 text-[#0F0F0F] bg-white/90 rounded-full hover:bg-gray-100 shadow-sm"
+                  className="absolute top-3 left-3 p-2 text-[#0F0F0F] bg-white/90 rounded-full hover:bg-gray-100 shadow-sm"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
                 </button>
                 <button
                   type="button"
                   onClick={() => deleteWelcomeImage(index)}
-                  className="absolute top-4 right-4 p-2 text-red-500 bg-white/90 rounded-full hover:bg-red-50 shadow-sm"
+                  className="absolute top-3 right-3 p-2 text-red-500 bg-white/90 rounded-full hover:bg-red-50 shadow-sm"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -527,21 +515,14 @@ export function AdminProductsPage() {
           </div>
         )}
 
-        <div className="bg-white p-8 rounded-2xl shadow-sm">
-          <div className="space-y-6">
+        <div className="bg-white p-4 md:p-8 rounded-2xl shadow-sm">
+          <div className="space-y-4 md:space-y-6">
             <div
               className={`upload-area${welcomeDragOver ? ' dragover' : ''}`}
               onClick={() => welcomeImageInputRef.current?.click()}
-              onDragOver={(e) => {
-                e.preventDefault();
-                setWelcomeDragOver(true);
-              }}
+              onDragOver={(e) => { e.preventDefault(); setWelcomeDragOver(true); }}
               onDragLeave={() => setWelcomeDragOver(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setWelcomeDragOver(false);
-                handleWelcomeImage(e.dataTransfer.files);
-              }}
+              onDrop={(e) => { e.preventDefault(); setWelcomeDragOver(false); handleWelcomeImage(e.dataTransfer.files); }}
             >
               <input
                 ref={welcomeImageInputRef}
@@ -550,26 +531,24 @@ export function AdminProductsPage() {
                 className="hidden"
                 onChange={(e) => handleWelcomeImage(e.target.files)}
               />
-              <p className="text-[#0F0F0F] font-medium">Click to upload welcome image</p>
-              <p className="text-[#0F0F0F]/50 text-sm">or drag and drop • PNG, JPG up to 5MB</p>
+              <p className="text-[#0F0F0F] font-medium text-sm">Click to upload welcome image</p>
+              <p className="text-[#0F0F0F]/50 text-xs md:text-sm">or drag and drop • PNG, JPG up to 5MB</p>
             </div>
             {welcomeImagePreview && (
               <div className="upload-preview">
                 <div className="upload-preview-item">
                   <img src={welcomeImagePreview} alt="Welcome preview" />
-                  <button type="button" onClick={() => setWelcomeImagePreview(null)}>
-                    ×
-                  </button>
+                  <button type="button" onClick={() => setWelcomeImagePreview(null)}>×</button>
                 </div>
               </div>
             )}
 
-            <div className="flex gap-4">
+            <div className="flex gap-3 md:gap-4">
               {editingWelcomeImageIndex !== null && (
                 <button
                   type="button"
                   onClick={cancelEditWelcomeImage}
-                  className="flex-1 py-4 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300"
+                  className="flex-1 py-3 md:py-4 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 text-sm md:text-base"
                 >
                   Cancel
                 </button>
@@ -578,7 +557,7 @@ export function AdminProductsPage() {
                 type="button"
                 onClick={submitWelcomeImage}
                 disabled={!welcomeImagePreview}
-                className="flex-1 py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80 disabled:opacity-50"
+                className="flex-1 py-3 md:py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80 disabled:opacity-50 text-sm md:text-base"
               >
                 {editingWelcomeImageIndex !== null ? 'Update Welcome Image' : 'Add Welcome Image'}
               </button>

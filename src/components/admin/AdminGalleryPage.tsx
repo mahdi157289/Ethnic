@@ -41,28 +41,21 @@ export function AdminGalleryPage() {
   };
 
   return (
-    <div id="admin-page-gallery" className={`admin-page p-8${adminPage === 'gallery' ? ' active' : ''}`}>
-      <div className="mb-12">
-        <h3 className="section-title font-display text-xl text-[#0F0F0F] mb-6">
+    <div id="admin-page-gallery" className={`admin-page p-4 md:p-8${adminPage === 'gallery' ? ' active' : ''}`}>
+      <div className="mb-8 md:mb-12">
+        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
           <span className="section-dot" />
           <span className="section-title-text">Add New Gallery Image</span>
           <span className="section-dot" />
         </h3>
-        <div className="bg-white p-8 rounded-2xl shadow-sm">
-          <form onSubmit={submitGalleryImage} className="space-y-6">
+        <div className="bg-white p-4 md:p-8 rounded-2xl shadow-sm">
+          <form onSubmit={submitGalleryImage} className="space-y-4 md:space-y-6">
             <div
               className={`upload-area${dragOver ? ' dragover' : ''}`}
               onClick={() => imageInputRef.current?.click()}
-              onDragOver={(e) => {
-                e.preventDefault();
-                setDragOver(true);
-              }}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
               onDragLeave={() => setDragOver(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setDragOver(false);
-                handleImage(e.dataTransfer.files);
-              }}
+              onDrop={(e) => { e.preventDefault(); setDragOver(false); handleImage(e.dataTransfer.files); }}
             >
               <input
                 ref={imageInputRef}
@@ -71,52 +64,50 @@ export function AdminGalleryPage() {
                 className="hidden"
                 onChange={(e) => handleImage(e.target.files)}
               />
-              <p className="text-[#0F0F0F] font-medium">Click to upload image</p>
-              <p className="text-[#0F0F0F]/50 text-sm">or drag and drop • PNG, JPG up to 5MB</p>
+              <p className="text-[#0F0F0F] font-medium text-sm">Click to upload image</p>
+              <p className="text-[#0F0F0F]/50 text-xs md:text-sm">or drag and drop • PNG, JPG up to 5MB</p>
             </div>
             {image && (
               <div className="upload-preview">
                 <div className="upload-preview-item">
                   <img src={image} alt="Preview" />
-                  <button type="button" onClick={() => setImage(null)}>
-                    ×
-                  </button>
+                  <button type="button" onClick={() => setImage(null)}>×</button>
                 </div>
               </div>
             )}
 
-            <button type="submit" disabled={!image} className="w-full py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80 disabled:opacity-50">
+            <button type="submit" disabled={!image} className="w-full py-3 md:py-4 bg-[#0F0F0F] text-white rounded-xl hover:bg-[#0F0F0F]/80 disabled:opacity-50 text-sm md:text-base">
               Add to Gallery
             </button>
           </form>
         </div>
       </div>
 
-      <div className="mb-12">
-        <h3 className="section-title font-display text-xl text-[#0F0F0F] mb-6">
+      <div className="mb-8 md:mb-12">
+        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
           <span className="section-dot" />
           <span className="section-title-text">Gallery Images</span>
           <span className="section-dot" />
         </h3>
         {galleryImages.length === 0 ? (
-          <div className="bg-white p-8 rounded-2xl shadow-sm text-center">
-            <p className="text-[#0F0F0F]/50">No gallery images yet. Add your first image above!</p>
+          <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm text-center">
+            <p className="text-[#0F0F0F]/50 text-sm">No gallery images yet. Add your first image above!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {galleryImages.map((image, index) => (
-              <div key={index} className="bg-white rounded-2xl p-4 shadow-sm relative">
+              <div key={index} className="bg-white rounded-2xl p-3 md:p-4 shadow-sm relative">
                 <img
                   src={image}
                   alt={`Gallery ${index + 1}`}
-                  className="w-full h-48 object-cover rounded-xl"
+                  className="w-full h-36 md:h-48 object-cover rounded-xl"
                 />
                 <button
                   type="button"
                   onClick={() => deleteGalleryImage(index)}
-                  className="absolute top-4 right-4 p-2 text-red-500 bg-white/90 rounded-full hover:bg-red-50 shadow-sm"
+                  className="absolute top-3 right-3 p-2 text-red-500 bg-white/90 rounded-full hover:bg-red-50 shadow-sm"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>

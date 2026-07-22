@@ -618,6 +618,12 @@
           position: relative;
           border-right: 1px solid var(--gold);
         }
+
+        @media (max-width: 767px) {
+          .admin-sidebar {
+            display: none;
+          }
+        }
         
         .admin-sidebar .p-4.border-b {
           border-color: var(--gold) !important;
