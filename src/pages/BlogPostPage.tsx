@@ -17,7 +17,6 @@ export function BlogPostPage() {
   // scroll container) so it can never extend past the blog's end line,
   // while cards are never sliced in half.
   const articleRef = useRef<HTMLDivElement>(null);
-  const leftColRef = useRef<HTMLDivElement>(null);
   const productScrollRef = useRef<HTMLDivElement>(null);
   const [showFade, setShowFade] = useState(false);
   useEffect(() => {
@@ -115,16 +114,11 @@ export function BlogPostPage() {
           </Link>
         </div>
 
-        {/* Two-column: image left, content right.
-            The left column is bounded (via JS) to the article's height,
-            so the product strip can never cross the blog's end line. */}
+        {/* Grid: image + article on top (desktop two-column), products below image.
+            On mobile (grid-cols-1) they flow in DOM order: image → article → products. */}
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-start pb-10 lg:border-b lg:border-[var(--gold)]/30">
-          {/* Image — left (sticky), bounded to the article height */}
-          <div
-            ref={leftColRef}
-            className="lg:sticky lg:top-28 space-y-8"
-            style={{ transition: 'max-height 0.2s ease' }}
-          >
+          {/* Image — top-left on desktop, first on mobile */}
+          <div className="lg:col-start-1 lg:row-start-1 lg:sticky lg:top-28">
             <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--gold)]">
               <img
                 src={blogPost.image}
@@ -132,41 +126,10 @@ export function BlogPostPage() {
                 className="w-full h-[300px] md:h-[440px] lg:h-[560px] object-cover"
               />
             </div>
-
-            {/* Product recommendations — scroll within the inner bounded area */}
-            {products.length > 0 && (
-              <div className="relative">
-                <div
-                  ref={productScrollRef}
-                  className="lg:overflow-y-auto pr-1"
-                >
-                  <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">
-                    Vous aimerez aussi
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4 pb-2">
-                    {products.map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
-                </div>
-                {showFade && (
-                  <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[var(--cream)] to-transparent" />
-                )}
-              </div>
-            )}
-
-            <div className="pt-6 text-center">
-              <Link
-                to="/store"
-                className="forma-btn-outline cursor-pointer"
-              >
-                Voir tous les produits
-              </Link>
-            </div>
           </div>
 
-          {/* Content — right (its height bounds the left column) */}
-          <div ref={articleRef}>
+          {/* Content — top-right on desktop, second on mobile (its height bounds the products) */}
+          <div ref={articleRef} className="lg:col-start-2 lg:row-start-1">
             <div className="flex items-center gap-3 text-sm uppercase tracking-widest text-[var(--gold)] mb-4">
               <span>Journal</span>
               <span className="w-1 h-1 rounded-full bg-[var(--gold)]" />
@@ -178,7 +141,7 @@ export function BlogPostPage() {
             <p className="text-[var(--charcoal)]/60 mb-8">By {blogPost.author}</p>
 
             <div
-              className="prose-blog text-[var(--charcoal)]/85 leading-loose text-lg md:text-xl"
+              className="prose-blog leading-loose text-lg md:text-xl"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
             />
 
@@ -191,6 +154,29 @@ export function BlogPostPage() {
               </Link>
             </div>
           </div>
+
+          {/* Product recommendations — below the image on desktop (col 1, row 2),
+              after the article on mobile so the content is never buried. */}
+          {products.length > 0 && (
+            <div className="lg:col-start-1 lg:row-start-2">
+              <div className="relative">
+                <div ref={productScrollRef} className="lg:overflow-y-auto pr-1">
+                  <h3 className="font-display text-xl text-[var(--charcoal)] mb-4 text-center">Vous aimerez aussi</h3>
+                  <div className="grid grid-cols-2 gap-4 pb-2">
+                    {products.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+                {showFade && (
+                  <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[var(--cream)] to-transparent" />
+                )}
+              </div>
+              <div className="pt-6 text-center">
+                <Link to="/store" className="forma-btn-outline cursor-pointer">Voir tous les produits</Link>
+              </div>
+            </div>
+          )}
         </div>
       </article>
       <Footer />

@@ -1012,6 +1012,15 @@
             font-style: italic;
         }
 
+        .prose-blog h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 0 0 1rem;
+            color: var(--charcoal);
+            line-height: 1.2;
+        }
+
         .prose-blog h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.75rem;
