@@ -4,6 +4,7 @@ import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { useStore } from '../../context/StoreContext';
 import { BrandLogo } from '../ui/BrandLogo';
 import { ethnicNavbarLogo } from '../../assets/brand';
+import { TopBar } from './TopBar';
 import gsap from 'gsap';
 
 const NAV_SECTIONS = ['collection', 'blog', 'categories-section'];
@@ -83,7 +84,9 @@ export function Nav() {
   }, [isMobileMenuOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0F0F0F]/90 backdrop-blur-xl border-b border-[var(--gold)]">
+    <>
+    <TopBar />
+    <nav className="fixed top-9 left-0 right-0 z-50 bg-[#0F0F0F]/90 backdrop-blur-xl border-b border-[var(--gold)]">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" aria-label="Ethnic home" onClick={closeMobileMenu}>
           <BrandLogo src={ethnicNavbarLogo} imageClassName="h-20 md:h-32 w-auto object-contain" />
@@ -250,5 +253,6 @@ export function Nav() {
         </div>
       )}
     </nav>
+    </>
   );
 }
