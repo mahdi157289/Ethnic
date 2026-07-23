@@ -44,7 +44,7 @@ export function VideoLoader({ onComplete }: VideoLoaderProps) {
         <video
           ref={videoRef}
           src={loaderVideo}
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-contain object-center"
           autoPlay
         muted
         playsInline
