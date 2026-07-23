@@ -290,19 +290,21 @@ export function CollectionCarouselSection() {
   return (
     <section ref={containerRef} id="collection" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div ref={titleRef} className="text-center mb-10">
-          <p className="text-sm tracking-[0.3em] text-[#0F0F0F]/60 uppercase mb-4">Notre Collection</p>
-          <div className="flex items-center justify-center gap-8 flex-wrap">
-            <h2 className="section-title font-display text-5xl font-medium text-[#0F0F0F]">
-              <span className="section-dot" />
-              <span className="section-title-text">Collection Complète</span>
-              <span className="section-dot" />
-            </h2>
-            <div className="flex items-center gap-3 flex-wrap">
+        <div ref={titleRef} className="mb-10">
+          <p className="text-xs sm:text-sm tracking-[0.3em] text-[#0F0F0F]/60 uppercase mb-3 text-center">
+            Notre Collection
+          </p>
+          <h2 className="section-title font-display text-3xl sm:text-4xl md:text-5xl font-medium text-[#0F0F0F] mb-8 md:mb-10">
+            <span className="section-dot hidden sm:block" />
+            <span className="section-title-text">Collection Complète</span>
+            <span className="section-dot hidden sm:block" />
+          </h2>
+          <div className="filter-bar-wrapper relative -mx-6 px-6 md:mx-0 md:px-0">
+            <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide md:justify-center md:flex-wrap md:overflow-x-visible md:pb-0">
               <button
                 type="button"
                 onClick={clearCategoryFilter}
-                className={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300${
+                className={`filter-btn flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300${
                   !currentCategoryFilter ? ' active' : ''
                 }`}
               >
@@ -313,7 +315,7 @@ export function CollectionCarouselSection() {
                   key={cat.id}
                   type="button"
                   onClick={() => filterByCategory(cat.name)}
-                  className={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300${
+                  className={`filter-btn flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300${
                     currentCategoryFilter === cat.name ? ' active' : ''
                   }`}
                 >
