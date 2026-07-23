@@ -945,16 +945,51 @@
             background: #F5F1EB;
             color: #0F0F0F;
             border: 1px solid var(--gold);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        
+
         .filter-btn:hover {
             background: #E8E0D5;
         }
-        
+
         .filter-btn.active {
             background: #0F0F0F;
             color: white;
             border-color: var(--gold);
+        }
+
+        /* Filter bar scroll hint — fade edges on mobile */
+        .filter-bar-wrapper {
+            position: relative;
+        }
+
+        .filter-bar-wrapper::before,
+        .filter-bar-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 32px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .filter-bar-wrapper::before {
+            left: -6px;
+            background: linear-gradient(to right, #FFFFFF, transparent);
+        }
+
+        .filter-bar-wrapper::after {
+            right: -6px;
+            background: linear-gradient(to left, #FFFFFF, transparent);
+        }
+
+        @media (min-width: 768px) {
+            .filter-bar-wrapper::before,
+            .filter-bar-wrapper::after {
+                display: none;
+            }
         }
         
         /* Product Card Filter Effect */
@@ -988,4 +1023,13 @@
         @keyframes appFadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* Hide scrollbar utility */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
