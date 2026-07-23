@@ -27,13 +27,13 @@ export function CollectionSection({ hideTitle = false }: CollectionSectionProps)
             </h2>
           )}
 
-          {/* Filter bar — mobile: horizontal scroll with edge fades, desktop: centered wrap */}
-          <div className="filter-bar-wrapper relative">
-            <div className="filter-bar flex items-center gap-2.5 overflow-x-auto pb-1 scrollbar-hide md:justify-center md:flex-wrap md:overflow-x-visible md:pb-0">
+          {/* Filter bar — mobile: single-line horizontal scroll, desktop: centered wrap */}
+          <div className="filter-bar-wrapper relative -mx-6 px-6 md:mx-0 md:px-0">
+            <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide md:justify-center md:flex-wrap md:overflow-x-visible md:pb-0">
               <button
                 type="button"
                 onClick={clearCategoryFilter}
-                className={`filter-btn flex-shrink-0 min-h-[44px] px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300${
+                className={`filter-btn flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300${
                   !currentCategoryFilter ? ' active' : ''
                 }`}
               >
@@ -44,7 +44,7 @@ export function CollectionSection({ hideTitle = false }: CollectionSectionProps)
                   key={cat.id}
                   type="button"
                   onClick={() => filterByCategory(cat.name)}
-                  className={`filter-btn flex-shrink-0 min-h-[44px] px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300${
+                  className={`filter-btn flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300${
                     currentCategoryFilter === cat.name ? ' active' : ''
                   }`}
                 >
