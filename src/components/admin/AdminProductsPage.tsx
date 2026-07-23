@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { useStore } from '../../context/StoreContext';
+import { SectionTitle } from '../ui/SectionTitle';
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
@@ -216,11 +217,7 @@ export function AdminProductsPage() {
   return (
     <div id="admin-page-products" className={`admin-page p-4 md:p-8${adminPage === 'products' ? ' active' : ''}`}>
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Manage Categories</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Manage Categories" size="sm" />
         <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-6" id="categories-list">
             {categories.map((cat) => (
@@ -282,13 +279,7 @@ export function AdminProductsPage() {
       </div>
 
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">
-            {editingProduct ? 'Edit Product' : 'Add New Product'}
-          </span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title={editingProduct ? 'Edit Product' : 'Add New Product'} size="sm" />
         <div className="bg-white p-4 md:p-8 rounded-2xl shadow-sm">
           <form onSubmit={submitProduct} className="space-y-4 md:space-y-6">
             <div className="bg-[#F5F1EB] p-4 md:p-6 rounded-xl text-center">
@@ -474,11 +465,7 @@ export function AdminProductsPage() {
       </div>
 
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Welcome Page Images</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Welcome Page Images" size="sm" />
         {welcomeImages.length === 0 ? (
           <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm text-center">
             <p className="text-[#0F0F0F]/50 text-sm">No welcome images yet. Add your first image below!</p>

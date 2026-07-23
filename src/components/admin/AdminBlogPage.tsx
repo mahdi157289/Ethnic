@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useStore } from '../../context/StoreContext';
+import { SectionTitle } from '../ui/SectionTitle';
 import type { BlogPost } from '../../types';
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
@@ -68,11 +69,7 @@ export function AdminBlogPage() {
   return (
     <div id="admin-page-blog" className={`admin-page p-4 md:p-8${adminPage === 'blog' ? ' active' : ''}`}>
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Blog Posts</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Blog Posts" size="sm" />
         {blogPosts.length === 0 ? (
           <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm text-center">
             <p className="text-[#0F0F0F]/50 text-sm">No blog posts yet. Add your first post below!</p>
@@ -127,13 +124,7 @@ export function AdminBlogPage() {
       </div>
 
       <div id="admin-blog-form" className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">
-            {editingId !== null ? 'Edit Blog Post' : 'Add New Blog Post'}
-          </span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title={editingId !== null ? 'Edit Blog Post' : 'Add New Blog Post'} size="sm" />
         <div className="bg-white p-4 md:p-8 rounded-2xl shadow-sm">
           <form onSubmit={submitBlogPost} className="space-y-4 md:space-y-6">
             <div className="grid md:grid-cols-2 gap-4 md:gap-6">
