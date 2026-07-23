@@ -35,7 +35,7 @@ export function BlogListPage() {
         <meta name="description" content="Articles et inspirations de la maison Ethnic." />
       </Helmet>
       <Nav />
-      <main className="pt-28 pb-24 px-6 bg-[var(--cream)] min-h-screen" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <main className="pt-36 pb-24 px-6 bg-[var(--cream)] min-h-screen" style={{ fontFamily: "'Inter', sans-serif" }}>
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center text-center mb-14">
             <span className="text-[var(--gold)] uppercase tracking-[0.3em] text-xs mb-4">Journal</span>

@@ -100,7 +100,7 @@ export function BlogPostPage() {
         `}</script>
       </Helmet>
       <Nav />
-      <article className="pt-32 pb-24 px-6 bg-[var(--cream)]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <article className="pt-40 pb-24 px-6 bg-[var(--cream)]" style={{ fontFamily: "'Inter', sans-serif" }}>
         {/* Back link */}
         <div className="max-w-6xl mx-auto mb-8">
           <Link

@@ -15,7 +15,7 @@ export function StorePage() {
         <link rel="canonical" href="https://yourdomain.com/store" />
       </Helmet>
       <Nav />
-      <div className="pt-36 md:pt-44 bg-white">
+      <div className="pt-44 md:pt-52 bg-white">
         <div className="max-w-7xl mx-auto px-6 pt-4 pb-10 text-center">
           <h1 className="font-display text-5xl md:text-6xl font-medium text-[#0F0F0F]">
             Collection Complète

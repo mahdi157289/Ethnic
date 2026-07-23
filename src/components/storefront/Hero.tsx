@@ -47,7 +47,7 @@ export function Hero() {
   const currentWelcomeImage = welcomeImages[activeWelcomeImageIndex];
 
   return (
-    <section ref={containerRef} className="min-h-screen flex items-center pt-20 relative overflow-hidden">
+    <section ref={containerRef} className="min-h-screen flex items-center pt-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div ref={textRef} className="space-y-8">
           <p className="text-sm tracking-[0.3em] text-[#0F0F0F]/60 uppercase">Artisanat & Bijoux</p>
