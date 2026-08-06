@@ -3,14 +3,19 @@ import { loaderVideo } from '../../assets/brand';
 
 interface VideoLoaderProps {
   onComplete: () => void;
+  backgroundColor?: string;
 }
 
 const MAX_WAIT_MS = 15000;
 
-export function VideoLoader({ onComplete }: VideoLoaderProps) {
+export function VideoLoader({ onComplete, backgroundColor }: VideoLoaderProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [fadeOut, setFadeOut] = useState(false);
   const completedRef = useRef(false);
+  
+  // Construct the background class
+  const bgClass = backgroundColor || 'bg-[#0F0F0F]';
+  const containerClass = `fixed inset-0 z-[100] flex items-center justify-center ${bgClass} transition-opacity duration-600 ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`;
 
   const finish = () => {
     if (completedRef.current) return;
@@ -33,13 +38,11 @@ export function VideoLoader({ onComplete }: VideoLoaderProps) {
   }, []);
 
   return (
-    <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#0F0F0F] transition-opacity duration-600 ${
-        fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
-      aria-label="Loading Ethnic"
-      role="status"
-    >
+      <div
+        className={containerClass}
+        aria-label="Loading Ethnic"
+        role="status"
+      >
       <div className="absolute inset-0 overflow-hidden">
         <video
           ref={videoRef}
