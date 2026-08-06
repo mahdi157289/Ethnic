@@ -20,6 +20,8 @@ export function HomePage() {
         <meta property="og:description" content="Découvrez nos bijoux artisanaux uniques, créés avec passion et savoir-faire traditionnel. Explorez nos collections et trouvez votre bijou préféré." />
         <meta property="og:url" content="https://ethnic-s2m2.onrender.com/" />
         <link rel="canonical" href="https://ethnic-s2m2.onrender.com/" />
+        <meta property="og:image" content="https://ethnic-s2m2.onrender.com/favicon.svg" />
+        <meta name="twitter:image" content="https://ethnic-s2m2.onrender.com/favicon.svg" />
         <script type="application/ld+json">{`
         {
           "@context": "https://schema.org",

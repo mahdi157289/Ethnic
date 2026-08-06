@@ -44,6 +44,8 @@ export function StorePage() {
         <meta property="og:description" content="Parcourez tous nos bijoux et filtrez par catégorie. Découvrez notre collection complète de bijoux artisanaux." />
         <meta property="og:url" content="https://ethnic-s2m2.onrender.com/store" />
         <link rel="canonical" href="https://ethnic-s2m2.onrender.com/store" />
+        <meta property="og:image" content="https://ethnic-s2m2.onrender.com/favicon.svg" />
+        <meta name="twitter:image" content="https://ethnic-s2m2.onrender.com/favicon.svg" />
         <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
       </Helmet>
       <Nav />
