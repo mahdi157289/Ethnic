@@ -46,7 +46,7 @@ export function TopBar() {
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
           <div className="overflow-hidden whitespace-nowrap">
-            <span className="inline-block animate-marquee text-xs tracking-wide text-[#0F0F0F]/70">
+            <span className="inline-block animate-marquee text-xs tracking-wide word-spacing-[0.25em] text-[#0F0F0F]/70">
               Cliquez sur un des réseaux sociaux pour nous contacter
             </span>
           </div>

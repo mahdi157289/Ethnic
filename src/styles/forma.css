@@ -1040,10 +1040,12 @@
             to { opacity: 1; }
         }
 
-        /* Top bar marquee */
+        /* Top bar marquee — text scrolls from fleche (left) to social icons (right) */
         @keyframes marquee {
             0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            8% { transform: translateX(0); }
+            92% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
 
         .animate-marquee {
