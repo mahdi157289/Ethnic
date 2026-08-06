@@ -23,6 +23,8 @@ const mimeTypes = {
   '.ico': 'image/x-icon',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
+  '.txt': 'text/plain',
+  '.xml': 'text/xml',
 };
 
 const server = http.createServer((req, res) => {
@@ -33,6 +35,19 @@ const server = http.createServer((req, res) => {
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     const ext = path.extname(filePath);
     res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
+    
+    // Cache headers
+    if (urlPath.startsWith('/assets/') && ext !== '.html') {
+      // Hashed static assets: long-term immutable caching
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (ext === '.html') {
+      // HTML: no cache (SPA fallback)
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    } else {
+      // Other static files: moderate caching
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    }
+    
     fs.createReadStream(filePath).pipe(res);
     return;
   }
@@ -41,6 +56,7 @@ const server = http.createServer((req, res) => {
   if (!path.extname(urlPath)) {
     filePath = path.join(root, 'index.html');
     res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     fs.createReadStream(filePath).pipe(res);
     return;
   }
