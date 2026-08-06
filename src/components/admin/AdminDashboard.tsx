@@ -1,5 +1,6 @@
 import { useStore } from '../../context/StoreContext';
 import { formatPrice } from '../../utils/formatPrice';
+import { SectionTitle } from '../ui/SectionTitle';
 import type { Order } from '../../types';
 
 export function AdminDashboard() {
@@ -27,11 +28,7 @@ export function AdminDashboard() {
   return (
     <div id="admin-page-dashboard" className={`admin-page p-4 md:p-8${adminPage === 'dashboard' ? ' active' : ''}`}>
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Platform Analytics</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Platform Analytics" size="sm" />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm">
             <p className="font-display text-xl md:text-3xl text-[#0F0F0F]">24,589</p>
@@ -62,11 +59,7 @@ export function AdminDashboard() {
       </div>
 
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Recent Orders</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Recent Orders" size="sm" />
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[600px]">
@@ -99,11 +92,7 @@ export function AdminDashboard() {
       </div>
 
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Manage Products</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Manage Products" size="sm" />
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[550px]">
@@ -176,11 +165,7 @@ export function AdminDashboard() {
       </div>
 
       <div className="mt-8 md:mt-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Email Subscribers</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Email Subscribers" size="sm" />
         <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
           <p id="subscribers-count" className="text-sm text-[#0F0F0F]/60 mb-4">
             {subscribers.length} people will be notified

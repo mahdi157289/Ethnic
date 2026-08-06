@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Tool-specific directories
+.agents/
+.opencode/
+graphify-out/
+forma/
+skills-lock.json
+nul

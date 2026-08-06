@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useStore } from '../../context/StoreContext';
+import { SectionTitle } from '../ui/SectionTitle';
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
@@ -43,11 +44,7 @@ export function AdminGalleryPage() {
   return (
     <div id="admin-page-gallery" className={`admin-page p-4 md:p-8${adminPage === 'gallery' ? ' active' : ''}`}>
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Add New Gallery Image</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Add New Gallery Image" size="sm" />
         <div className="bg-white p-4 md:p-8 rounded-2xl shadow-sm">
           <form onSubmit={submitGalleryImage} className="space-y-4 md:space-y-6">
             <div
@@ -84,11 +81,7 @@ export function AdminGalleryPage() {
       </div>
 
       <div className="mb-8 md:mb-12">
-        <h3 className="section-title font-display text-lg md:text-xl text-[#0F0F0F] mb-4 md:mb-6">
-          <span className="section-dot" />
-          <span className="section-title-text">Gallery Images</span>
-          <span className="section-dot" />
-        </h3>
+        <SectionTitle title="Gallery Images" size="sm" />
         {galleryImages.length === 0 ? (
           <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm text-center">
             <p className="text-[#0F0F0F]/50 text-sm">No gallery images yet. Add your first image above!</p>
