@@ -1040,17 +1040,16 @@
             to { opacity: 1; }
         }
 
-        /* Top bar marquee — message scrolls in from the fleche (left) and comes to rest flush against the social icons (right) */
+        /* Top bar marquee — message scrolls in slowly from the fleche (left), rests flush against the social icons (right), then returns to the fleche side before looping */
         @keyframes marquee {
             0% { right: 100%; }
-            25% { right: 0; }
-            55% { right: 0; }
-            80% { right: -100%; }
-            100% { right: -100%; }
+            35% { right: 0; }
+            70% { right: 0; }
+            100% { right: 100%; }
         }
 
         .animate-marquee {
-            animation: marquee 10s linear infinite;
+            animation: marquee 16s linear infinite;
         }
 
         /* Editorial blog article typography (rendered HTML from admin) */
