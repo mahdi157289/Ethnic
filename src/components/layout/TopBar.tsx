@@ -52,6 +52,13 @@ export function TopBar() {
             >
               Cher client, vous pouvez cliquer sur l'un de nos réseaux sociaux pour nous contacter.
             </span>
+            <span
+              dir="rtl"
+              className="animate-marquee absolute right-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-xs text-[#0F0F0F]/70"
+              style={{ animationDelay: '-16s' }}
+            >
+              عزيزي العميل، يمكنك النقر على أحد شبكات التواصل الاجتماعي الخاصة بنا للتواصل معنا.
+            </span>
           </div>
         </div>
 
