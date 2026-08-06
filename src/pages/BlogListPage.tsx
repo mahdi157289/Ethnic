@@ -51,7 +51,7 @@ export function BlogListPage() {
                 <Link key={post.id} to={`/blog/${post.id}`} className="group cursor-pointer block">
                   <article className="overflow-hidden rounded-2xl border border-[var(--gold)] bg-white hover:bg-[var(--beige)] transition-colors duration-300">
                     <div className="img-zoom h-56 w-full">
-                      <img src={post.image} alt={post.title} className="w-full h-full object-cover" loading="lazy" />
+                      <img src={post.image} alt={post.title} className="w-full h-full object-cover" loading="lazy" decoding="async" width={600} height={400} />
                     </div>
                     <div className="p-6">
                       <div className="text-xs text-[var(--gold)] mb-2">{formatDate(post.createdAt)}</div>

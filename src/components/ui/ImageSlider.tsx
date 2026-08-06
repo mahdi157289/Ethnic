@@ -50,6 +50,10 @@ export function ImageSlider({
           <img
             src={img}
             alt={alt}
+            loading="lazy"
+            decoding="async"
+            width={400}
+            height={400}
             style={{
               transformOrigin: `${position.x * 100}% ${position.y * 100}%`
             }}
@@ -75,7 +79,7 @@ export function ImageSlider({
                 setActiveIndex(idx);
               }}
             >
-              <img src={img} alt={`Thumbnail ${idx + 1}`} />
+              <img src={img} alt={`Thumbnail ${idx + 1}`} loading="lazy" decoding="async" width={80} height={80} />
             </button>
           ))}
         </div>

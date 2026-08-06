@@ -74,7 +74,7 @@ export function BlogSection() {
                   className="flex-shrink-0 w-72 forma-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all"
                 >
                   <div className="h-48 overflow-hidden">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                    <img src={post.image} alt={post.title} loading="lazy" decoding="async" width={400} height={300} className="w-full h-full object-cover" />
                   </div>
                   <div className="p-5 text-center">
                     <div className="flex items-center justify-between text-xs text-[#0F0F0F]/50 mb-2">
@@ -102,7 +102,7 @@ export function BlogSection() {
                   className="forma-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
                 >
                   <div className="h-64 overflow-hidden">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                    <img src={post.image} alt={post.title} loading="lazy" decoding="async" width={400} height={300} className="w-full h-full object-cover" />
                   </div>
                   <div className="p-6 text-center">
                     <div className="flex items-center justify-between text-sm text-[#0F0F0F]/50 mb-3">

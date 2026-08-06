@@ -123,6 +123,10 @@ export function BlogPostPage() {
               <img
                 src={blogPost.image}
                 alt={blogPost.title}
+                loading="lazy"
+                decoding="async"
+                width={800}
+                height={600}
                 className="w-full h-[300px] md:h-[440px] lg:h-[560px] object-cover"
               />
             </div>

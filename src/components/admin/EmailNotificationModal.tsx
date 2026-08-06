@@ -32,6 +32,10 @@ export function EmailNotificationModal() {
             <img
               src={emailModalProduct.images[0]}
               alt={emailModalProduct.name}
+              loading="lazy"
+              decoding="async"
+              width={400}
+              height={200}
               className="w-full h-40 object-cover rounded-lg mb-3"
             />
             <h5 className="font-display text-lg text-[#0F0F0F]">{emailModalProduct.name}</h5>

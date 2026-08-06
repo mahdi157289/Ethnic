@@ -77,6 +77,10 @@ export function Hero() {
                   src={currentWelcomeImage}
                   key={`welcome-${activeWelcomeImageIndex}`}
                   alt="Bijoux artisanaux Ethnic"
+                  loading="lazy"
+                  decoding="async"
+                  width={600}
+                  height={400}
                   className="w-full h-80 object-cover rounded-2xl transition-opacity duration-1000"
                 />
               ) : product ? (
@@ -85,6 +89,10 @@ export function Hero() {
                     key={product.id}
                     src={product.images[0]}
                     alt={product.name}
+                    loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={400}
                     className="hero-showcase-image w-full h-full object-contain p-4"
                   />
                   <div className="absolute inset-x-0 bottom-0 px-5 py-4 bg-gradient-to-t from-[#0F0F0F]/75 to-transparent">

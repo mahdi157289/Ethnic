@@ -67,6 +67,10 @@ export function GallerySection() {
               <img 
                 src={image} 
                 alt={`Gallery image ${index + 1}`} 
+                loading="lazy"
+                decoding="async"
+                width={600}
+                height={400}
                 className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>

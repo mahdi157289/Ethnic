@@ -28,7 +28,7 @@ export function CategoriesSection() {
       tabIndex={0}
     >
       <div className="category-image-wrap rounded-2xl overflow-hidden mb-6">
-        <img src={cat.image} alt={cat.name} />
+        <img src={cat.image} alt={cat.name} loading="lazy" decoding="async" width={400} height={300} />
       </div>
       <div className="flex flex-col items-center justify-center">
         <h3 className="font-display text-2xl text-[#0F0F0F] group-hover:opacity-70 transition-opacity">{cat.name}</h3>

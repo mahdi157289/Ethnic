@@ -30,6 +30,10 @@ export function CartSidebar() {
                   <img
                     src={item.image ?? ''}
                     alt={item.name}
+                    loading="lazy"
+                    decoding="async"
+                    width={64}
+                    height={64}
                     className="w-16 h-16 object-cover rounded-lg shrink-0"
                   />
                   <div className="flex-1 min-w-0">
