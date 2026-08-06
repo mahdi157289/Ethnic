@@ -64,7 +64,7 @@ export function BlogPostPage() {
     );
   }
 
-  const canonicalUrl = `https://yourdomain.com/blog/${blogPost.id}`;
+  const canonicalUrl = `https://ethnic-s2m2.onrender.com/blog/${blogPost.id}`;
 
   return (
     <>
@@ -93,7 +93,7 @@ export function BlogPostPage() {
             "name": "Ethnic",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://yourdomain.com/favicon.svg"
+               "url": "https://ethnic-s2m2.onrender.com/favicon.svg"
             }
           }
         }

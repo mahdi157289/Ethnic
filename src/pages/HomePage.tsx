@@ -18,14 +18,14 @@ export function HomePage() {
         <meta name="description" content="Découvrez nos bijoux artisanaux uniques, créés avec passion et savoir-faire traditionnel. Explorez nos collections et trouvez votre bijou préféré." />
         <meta property="og:title" content="Ethnic | Bijoux Artisanaux Uniques" />
         <meta property="og:description" content="Découvrez nos bijoux artisanaux uniques, créés avec passion et savoir-faire traditionnel. Explorez nos collections et trouvez votre bijou préféré." />
-        <meta property="og:url" content="https://yourdomain.com/" />
-        <link rel="canonical" href="https://yourdomain.com/" />
+        <meta property="og:url" content="https://ethnic-s2m2.onrender.com/" />
+        <link rel="canonical" href="https://ethnic-s2m2.onrender.com/" />
         <script type="application/ld+json">{`
         {
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Ethnic",
-          "url": "https://yourdomain.com/"
+          "url": "https://ethnic-s2m2.onrender.com/"
         }
         `}</script>
       </Helmet>

@@ -1,0 +1,10 @@
+- [x] Cart drawer is full-width on mobile (`w-full max-w-[90vw] sm:w-96`), no horizontal overflow at 375px
+- [x] Cart drawer keeps fixed width (≤384px) on desktop
+- [x] Cart overlay still covers the screen correctly
+- [x] Modal overlay has edge padding (`p-4`) and scrolls when content is tall
+- [x] Tall modals (checkout/quick view) are fully reachable on a phone, not clipped at top/bottom
+- [x] Nav search/cart/hamburger buttons have ≥44px tappable area (`p-2`)
+- [x] Nav icon buttons have `cursor-pointer`
+- [x] No page content hidden behind the fixed navbar on mobile (top padding sufficient)
+- [x] `npm run build` passes with no TypeScript errors
+- [x] Verified at 375px: cart drawer fits, modals safe, nav tappable, no hidden content

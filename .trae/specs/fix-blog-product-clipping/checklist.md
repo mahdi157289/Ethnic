@@ -1,0 +1,9 @@
+- [x] Left column no longer uses hard `overflow-hidden` that slices product cards
+- [x] Product area scrolls internally with a height derived from the measured article height (no magic `calc(100%-620px)`)
+- [x] A fade/gradient indicator shows when more products exist below the fold
+- [x] "Voir tous les produits" button is fully visible and not clipped
+- [x] "Voir tous les produits" button aligns at the same level as "Voir tous les articles"
+- [x] Fine divider line under both columns is preserved as the boundary
+- [x] Product strip still cannot extend past the article's end line
+- [x] `npm run build` passes with no TypeScript errors
+- [x] Last visible product card and button are completely clear on long and short blog posts (verified in browser after hard refresh)

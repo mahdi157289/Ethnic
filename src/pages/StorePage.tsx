@@ -11,8 +11,8 @@ export function StorePage() {
         <meta name="description" content="Parcourez tous nos bijoux et filtrez par catégorie. Découvrez notre collection complète de bijoux artisanaux." />
         <meta property="og:title" content="Collection Complète | Ethnic" />
         <meta property="og:description" content="Parcourez tous nos bijoux et filtrez par catégorie. Découvrez notre collection complète de bijoux artisanaux." />
-        <meta property="og:url" content="https://yourdomain.com/store" />
-        <link rel="canonical" href="https://yourdomain.com/store" />
+        <meta property="og:url" content="https://ethnic-s2m2.onrender.com/store" />
+        <link rel="canonical" href="https://ethnic-s2m2.onrender.com/store" />
       </Helmet>
       <Nav />
       <div className="pt-44 md:pt-52 bg-white">
