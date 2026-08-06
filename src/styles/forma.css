@@ -1040,12 +1040,12 @@
             to { opacity: 1; }
         }
 
-        /* Top bar marquee — message appears from the fleche side (left), rests flush against the social icons (right), then disappears past the socials before reappearing from the fleche side */
+        /* Top bar marquee — message appears from the fleche side (left), comes to rest centered in the white space between fleche and social icons, then disappears past the socials before reappearing from the fleche side */
         @keyframes marquee {
-            0% { right: 100%; }
-            35% { right: 0; }
-            70% { right: 0; }
-            100% { right: -100%; }
+            0% { right: 100%; transform: translateX(0); }
+            35% { right: 50%; transform: translateX(50%); }
+            70% { right: 50%; transform: translateX(50%); }
+            100% { right: -100%; transform: translateX(50%); }
         }
 
         .animate-marquee {
