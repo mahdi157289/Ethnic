@@ -50,7 +50,7 @@ export function TopBar() {
               className="animate-marquee absolute right-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-xs tracking-wide text-[#0F0F0F]/70"
               style={{ wordSpacing: '0.3em' }}
             >
-              Cliquez sur un des réseaux sociaux pour nous contacter
+              Cher client, vous pouvez cliquer sur l'un de nos réseaux sociaux pour nous contacter.
             </span>
           </div>
         </div>
