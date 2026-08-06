@@ -33,7 +33,7 @@ export function TopBar() {
     <div className="fixed top-0 left-0 right-0 z-[60] bg-white border-b border-gray-200 h-9 flex items-center">
       <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
         {/* Left: scrolling message */}
-        <div className="hidden md:flex items-center gap-2 overflow-hidden">
+        <div className="hidden md:flex flex-1 min-w-0 items-center gap-2 overflow-hidden">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -45,8 +45,11 @@ export function TopBar() {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-          <div className="overflow-hidden whitespace-nowrap">
-            <span className="inline-block animate-marquee text-xs tracking-wide text-[#0F0F0F]/70" style={{ wordSpacing: '0.3em' }}>
+          <div className="relative flex-1 h-8 overflow-hidden">
+            <span
+              className="animate-marquee absolute right-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-xs tracking-wide text-[#0F0F0F]/70"
+              style={{ wordSpacing: '0.3em' }}
+            >
               Cliquez sur un des réseaux sociaux pour nous contacter
             </span>
           </div>
